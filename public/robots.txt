@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thermalpalace-demo.japonbaligi.com/sitemap.xml
