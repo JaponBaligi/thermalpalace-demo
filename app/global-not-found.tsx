@@ -16,11 +16,6 @@ export default function GlobalNotFound() {
   return (
     <html lang="tr" className={fontVars}>
       <body className="tp-404">
-        <div className="tp-steam tp-steam-soft" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
         <main className="tp-wrap tp-narrow tp-404-main">
           <Link href="/" className="tp-home-link">
             <Wordmark line="Akköy · Termal" />

@@ -23,6 +23,4 @@ const vec3 DEEP = vec3(0.035, 0.040, 0.045);
 const vec3 CEIL = vec3(0.380, 0.370, 0.355);
 const vec3 SAND = vec3(0.784, 0.529, 0.227);
 const vec3 PETROL = vec3(0.165, 0.192, 0.200);
-const vec3 STEAM_LIT = vec3(0.420, 0.400, 0.370);
-const vec3 STEAM_SHADE = vec3(0.120, 0.130, 0.140);
 `;
