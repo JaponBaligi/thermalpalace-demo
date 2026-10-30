@@ -1,3 +1,4 @@
+import { SpaWater } from "../SpaWater";
 import { anchors, routes, type Locale } from "@/content/routes";
 import { t } from "@/content";
 import { site } from "@/content/site";
@@ -6,7 +7,7 @@ import { PoolsShowcase } from "../PoolsShowcase";
 import { pools } from "@/content/spa";
 import { MapBlock } from "../MapBlock";
 import { FacilityList, PoolCards, Sessions, UnitCards, UnitFeatures } from "../sections";
-import { ArrowIcon, Caustics, delay, Kicker, NewTab, PhoneIcon, PinIcon, Rich, Ridges, WaterLine, WhatsAppPending } from "../ui";
+import { ArrowIcon, delay, Kicker, NewTab, PhoneIcon, PinIcon, Rich, Ridges, WaterLine, WhatsAppPending } from "../ui";
 
 export function HomePage({ locale }: { locale: Locale }) {
   const c = t(locale);
@@ -23,11 +24,11 @@ export function HomePage({ locale }: { locale: Locale }) {
           {/* static export: pre-sized WebP, no next/image optimiser */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/termal-orman-1304.webp"
-            srcSet="/images/termal-orman-1000.webp 1000w, /images/termal-orman-1304.webp 1304w"
+            src="/images/hero-1920.webp"
+            srcSet="/images/hero-1280.webp 1280w, /images/hero-1920.webp 1920w"
             sizes="100vw"
-            width={1304}
-            height={1150}
+            width={1920}
+            height={1080}
             alt=""
             fetchPriority="high"
             decoding="async"
@@ -167,7 +168,7 @@ export function HomePage({ locale }: { locale: Locale }) {
 
       {/* S3 — spa, light through water */}
       <section className="tp-scene tp-spa-scene tp-dark" data-scene="3" aria-labelledby="tp-s3-h">
-        <Caustics />
+        <SpaWater />
         <div className="tp-wrap tp-spa-grid">
           <div className="tp-reveal">
             <Kicker depth={depth[3]}>{h.spa.kicker}</Kicker>

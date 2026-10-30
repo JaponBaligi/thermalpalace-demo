@@ -22,9 +22,6 @@ uniform vec3 uCamRight;
 uniform vec3 uSunDir;
 uniform sampler2D uSteam;
 uniform float uWaveAmp;
-uniform sampler2D uVideo;
-uniform vec2 uVidScale;
-uniform float uVideoMix;
 #ifdef RIPPLE_SIM
 uniform sampler2D uRipple;
 uniform vec3 uRippleRect;
@@ -73,7 +70,6 @@ void main() {
   vec2 ndc = vUv * 2.0 - 1.0;
   vec3 dir = normalize(uCamFwd + ndc.x * uAspect * uTanHalf * uCamRight + ndc.y * uTanHalf * uCamUp);
   vec3 col;
-  vec2 disp = vec2(0.0);
 
   if (dir.y >= -0.0005) {
     col = sky(dir);
@@ -108,7 +104,6 @@ void main() {
 #endif
 
     vec3 n = normalize(vec3(-g.x, 1.0, -g.y));
-    disp = n.xz;
     vec3 V = -dir;
     float ndv = max(dot(n, V), 0.0);
     // F0 above water's 0.02 so the sky still reads from above (art direction, not physics)
@@ -133,11 +128,6 @@ void main() {
   }
 
   col = clamp(col, DEEP, CEIL);
-  // real footage under the procedural surface: the shader only refracts it (cursor ripples) and adds steam
-  if (uVideoMix > 0.0) {
-    vec2 vuv = (vUv - 0.5) * uVidScale + 0.5 + disp * 0.035;
-    col = mix(col, texture(uVideo, vuv).rgb, uVideoMix);
-  }
   vec4 steam = texture(uSteam, vUv);
   col = col * (1.0 - steam.a) + steam.rgb;
 

@@ -202,34 +202,6 @@ export function WaterPlate({ id, tone }: { id: string; tone: Tone }) {
   );
 }
 
-/** Caustic light network for the spa scene (LITE stand-in for the caustics shader), plus rising steam on tiers 1–3. */
-export function Caustics({ className = "" }: { className?: string }) {
-  return (
-    <>
-    <svg className={`tp-caustics ${className}`} aria-hidden="true" focusable="false" width="100%" height="100%">
-      <defs>
-        <pattern id="tp-caustic-tile" width="240" height="240" patternUnits="userSpaceOnUse" patternTransform="scale(1.7) rotate(-8)">
-          <g fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round">
-            <path d="M0 40c30 10 50-12 80 4s40 34 70 22 50-30 90-18" />
-            <path d="M0 130c26-16 54 6 76-10s34-40 64-30 46 34 70 24 22-8 30-6" />
-            <path d="M0 200c34 6 46-22 82-14s44 30 76 20 50-24 82-16" />
-            <path d="M40 0c-10 30 14 48-2 78s-26 44-8 72 20 54 6 90" />
-            <path d="M150 0c12 28-12 50 6 78s30 40 12 70-22 52-6 92" />
-            <path d="M210 0c-8 34 18 44 4 74s-20 50-2 76 14 50 6 90" />
-          </g>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#tp-caustic-tile)" />
-    </svg>
-    <div className="tp-steam-rise" aria-hidden="true">
-      {[0, 1, 2, 3, 4].map((k) => (
-        <span key={k} />
-      ))}
-    </div>
-    </>
-  );
-}
-
 /** Evening hillside of Termal: three layered ridges (LITE stand-in for the sky shader). */
 export function Ridges({ className = "" }: { className?: string }) {
   return (

@@ -11,7 +11,6 @@ export {
   Vector2,
   Vector3,
   Vector4,
-  VideoTexture,
   WebGLRenderTarget,
   WebGLRenderer,
 } from "three";

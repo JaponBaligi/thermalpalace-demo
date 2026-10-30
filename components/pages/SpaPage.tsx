@@ -3,7 +3,8 @@ import { t } from "@/content";
 import { telLink } from "@/lib/contact";
 import { ContactStrip } from "../ContactStrip";
 import { FacilityList, PoolCards, Sessions } from "../sections";
-import { Caustics, PhoneIcon, Rich, WhatsAppPending } from "../ui";
+import { PhoneIcon, Rich, WhatsAppPending } from "../ui";
+import { SpaWater } from "../SpaWater";
 import { PageHero } from "./PageHero";
 
 export function SpaPage({ locale }: { locale: Locale }) {
@@ -27,7 +28,7 @@ export function SpaPage({ locale }: { locale: Locale }) {
       </section>
 
       <section className="tp-scene tp-spa-scene tp-spa-rise tp-dark" data-scene="3" aria-labelledby="tp-spa-h">
-        <Caustics />
+        <SpaWater />
         <div className="tp-wrap tp-spa-grid">
           <div className="tp-reveal">
             <h2 id="tp-spa-h" className="tp-h2 tp-h2-xl">
