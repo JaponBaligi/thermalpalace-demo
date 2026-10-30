@@ -166,12 +166,30 @@ html.lenis body {
     max-inline-size: 52rem;
   }
 
+  /* fixed WebGL layer; 100lvh so mobile URL-bar changes never resize the buffers */
   .tp-stage {
     position: fixed;
-    inset: 0;
+    inset: 0 0 auto;
     z-index: -1;
+    block-size: 100lvh;
     pointer-events: none;
     contain: strict;
+  }
+
+  .tp-canvas {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    opacity: 0;
+    transition: opacity 800ms var(--ease-liquid);
+  }
+
+  .tp-canvas.is-on {
+    opacity: 1;
+  }
+
+  html[data-gl="on"] body {
+    background: transparent;
   }
 
   .tp-skip {
@@ -878,7 +896,39 @@ html.lenis body {
     position: relative;
     isolation: isolate;
     overflow: clip;
+  }
+
+  .tp-page-hero,
+  .tp-hero::before {
     background: linear-gradient(180deg, var(--color-cream) 0%, #f1efe7 50%, #e2ece8 82%, var(--color-water) 100%);
+  }
+
+  /* LITE backgrounds of S0/S1 sit in fading layers; with WebGL on they reveal the canvas behind the page */
+  .tp-hero::before,
+  .tp-surface::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    transition: opacity 900ms var(--ease-liquid);
+  }
+
+  html[data-gl="on"] .tp-hero::before,
+  html[data-gl="on"] .tp-surface::before,
+  html[data-gl="on"] .tp-hero .tp-steam {
+    opacity: 0;
+  }
+
+  /* the canvas replaces the CSS steam; stop its animations once it has faded out */
+  html[data-gl="on"] .tp-hero .tp-steam {
+    visibility: hidden;
+    transition:
+      opacity 900ms var(--ease-liquid),
+      visibility 0s 900ms;
+  }
+
+  html[data-gl="on"] .tp-hero .tp-steam span {
+    animation-play-state: paused;
   }
 
   .tp-hero-inner {
@@ -1017,6 +1067,7 @@ html.lenis body {
     z-index: -1;
     overflow: hidden;
     pointer-events: none;
+    transition: opacity 900ms var(--ease-liquid);
   }
 
   .tp-steam span {
@@ -1097,8 +1148,11 @@ html.lenis body {
   /* ---------- S1 surface ---------- */
 
   .tp-surface {
-    background: linear-gradient(180deg, var(--color-water) 0%, #c8dedb 100%);
     padding-block: clamp(4rem, 9vw, 7rem);
+  }
+
+  .tp-surface::before {
+    background: linear-gradient(180deg, var(--color-water) 0%, #c8dedb 100%);
   }
 
   .tp-surface-grid {
@@ -1205,8 +1259,14 @@ html.lenis body {
   /* ---------- S2 pools, under water ---------- */
 
   .tp-pools-scene {
-    background: linear-gradient(180deg, #c8dedb 0, var(--color-petrol) 13rem, var(--color-petrol) 70%, var(--color-petrol-deep) 100%);
+    /* eased descent from the surface colour, so the edge to S1 has no visible kink */
+    background: linear-gradient(180deg, #c8dedb 0, #bcd5d2 2rem, #9dbdbb 4.5rem, #6a9395 7rem, #34636a 9.5rem, var(--color-petrol) 12rem, var(--color-petrol) 70%, var(--color-petrol-deep) 100%);
     padding-block-start: clamp(10rem, 18vw, 14rem);
+  }
+
+  /* with WebGL the canvas water continues under the top of S2 and sinks into petrol */
+  html[data-gl="on"] .tp-pools-scene {
+    background: linear-gradient(180deg, rgb(18 57 63 / 0) 0, rgb(18 57 63 / 0.22) 2.5rem, rgb(18 57 63 / 0.55) 5rem, rgb(18 57 63 / 0.84) 8rem, var(--color-petrol) 11rem, var(--color-petrol) 70%, var(--color-petrol-deep) 100%);
   }
 
   .tp-rays {
@@ -2027,6 +2087,34 @@ html.lenis body {
   }
 
   .tp-footer-demo {
+    color: var(--color-sand);
+  }
+
+  .tp-lite-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    gap: 0.75rem;
+    min-block-size: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-mist);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .tp-lite-state {
+    padding: 0.15rem 0.65rem;
+    border: 1px solid rgb(207 227 225 / 0.4);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-cream);
+  }
+
+  .tp-lite-toggle[aria-pressed="true"] .tp-lite-state {
+    border-color: var(--color-sand);
     color: var(--color-sand);
   }
 
