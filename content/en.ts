@@ -15,6 +15,7 @@ export const en: SiteContent = {
     call: "Call",
     directions: "Get directions",
     directionsShort: "Directions",
+    poolPhoto: "show the photo in the background",
     whatsapp: "WhatsApp",
     whatsappPending: "Number to be supplied by the property",
     whatsappPendingShort: "number pending",

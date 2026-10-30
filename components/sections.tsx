@@ -6,8 +6,9 @@ import { telLink } from "@/lib/contact";
 import { delay, PhoneIcon, Rich, UnitGlyph, Verify, WaterPlate } from "./ui";
 
 /** Pool "plates": one card per pool, procedural art on top. P3 pins these horizontally on desktop. */
-export function PoolCards({ locale, headingLevel = 3 }: { locale: Locale; headingLevel?: 2 | 3 }) {
+export function PoolCards({ locale, headingLevel = 3, interactive = false }: { locale: Locale; headingLevel?: 2 | 3; interactive?: boolean }) {
   const H = headingLevel === 2 ? "h2" : "h3";
+  const photo = t(locale).common.poolPhoto;
   return (
     <ul className="tp-pools" data-webgl-cards="pools">
       {pools.map((p, i) => (
@@ -26,6 +27,7 @@ export function PoolCards({ locale, headingLevel = 3 }: { locale: Locale; headin
             </H>
             {p.line ? <p className="tp-pool-line">{p.line[locale]}</p> : null}
           </div>
+          {interactive ? <button type="button" className="tp-pool-hit" data-i={i} aria-pressed="false" aria-label={`${p.name[locale]}: ${photo}`} /> : null}
         </li>
       ))}
     </ul>

@@ -16,6 +16,7 @@ export const tr = {
     call: "Ara",
     directions: "Yol tarifi al",
     directionsShort: "Yol tarifi",
+    poolPhoto: "fotoğrafı arka planda göster",
     whatsapp: "WhatsApp",
     whatsappPending: "Numara işletmeden alınacak",
     whatsappPendingShort: "numara alınacak",
