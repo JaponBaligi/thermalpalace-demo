@@ -37,6 +37,7 @@ export const tr = {
       rights: "Yalova Thermal Palace",
       demo: "Örnek tasarım – içerik işletmeyle netleştirilecek.",
       osm: "Harita verisi © OpenStreetMap katkıcıları",
+      credits: "Görsel kaynakları",
       liteMode: "Hafif mod",
       liteOn: "Açık",
       liteOff: "Kapalı",

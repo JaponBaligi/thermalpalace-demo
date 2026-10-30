@@ -36,6 +36,7 @@ export const en: SiteContent = {
       rights: "Yalova Thermal Palace",
       demo: "Sample design – content to be confirmed with the business.",
       osm: "Map data © OpenStreetMap contributors",
+      credits: "Image credits",
       liteMode: "Lite mode",
       liteOn: "On",
       liteOff: "Off",

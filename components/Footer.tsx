@@ -4,6 +4,7 @@ import { CREDIT_TEXT, IS_DEMO, SHOW_CREDIT, site } from "@/content/site";
 import { phoneText, telLink } from "@/lib/contact";
 import { Rich, Wordmark } from "./ui";
 import { LiteToggle } from "./LiteToggle";
+import { creditsPath } from "@/content/credits";
 
 export function Footer({ locale }: { locale: Locale }) {
   const c = t(locale).common;
@@ -66,6 +67,11 @@ export function Footer({ locale }: { locale: Locale }) {
         </p>
         {IS_DEMO ? <p className="tp-footer-demo">{c.footer.demo}</p> : null}
         <p className="tp-footer-osm">{c.footer.osm}</p>
+        <p>
+          <a href={creditsPath[locale]} className="tp-footer-link">
+            {c.footer.credits}
+          </a>
+        </p>
         <LiteToggle label={c.footer.liteMode} on={c.footer.liteOn} off={c.footer.liteOff} />
         {SHOW_CREDIT ? <p className="tp-footer-credit">{CREDIT_TEXT}</p> : null}
       </div>

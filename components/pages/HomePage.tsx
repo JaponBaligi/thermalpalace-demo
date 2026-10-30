@@ -17,6 +17,20 @@ export function HomePage({ locale }: { locale: Locale }) {
     <>
       {/* S0 — steam */}
       <section className="tp-hero" data-scene="0" aria-labelledby="tp-hero-h">
+        <div className="tp-hero-photo" aria-hidden="true">
+          {/* static export: pre-sized WebP, no next/image optimiser */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/termal-orman-1304.webp"
+            srcSet="/images/termal-orman-1000.webp 1000w, /images/termal-orman-1304.webp 1304w"
+            sizes="100vw"
+            width={1304}
+            height={1150}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+          />
+        </div>
         <div className="tp-steam" aria-hidden="true">
           <span />
           <span />
