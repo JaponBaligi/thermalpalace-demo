@@ -5,6 +5,7 @@ import { phoneText, telLink } from "@/lib/contact";
 import { Rich, Wordmark } from "./ui";
 import { LiteToggle } from "./LiteToggle";
 import { creditsPath } from "@/content/credits";
+import { FooterFit } from "./FooterFit";
 
 export function Footer({ locale }: { locale: Locale }) {
   const c = t(locale).common;
@@ -12,6 +13,7 @@ export function Footer({ locale }: { locale: Locale }) {
   const label: Record<PageKey, string> = { home: c.home, rooms: c.nav.rooms, spa: c.nav.spa, contact: c.nav.contact };
   return (
     <footer className="tp-footer tp-dark">
+      <FooterFit />
       <div className="tp-wrap tp-footer-grid">
         <div className="tp-footer-brand">
           <Wordmark line={c.footer.tagline} className="tp-mark-light" />

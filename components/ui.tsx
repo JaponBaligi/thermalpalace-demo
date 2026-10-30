@@ -202,9 +202,10 @@ export function WaterPlate({ id, tone }: { id: string; tone: Tone }) {
   );
 }
 
-/** Caustic light network for the spa scene (LITE stand-in for the caustics shader). */
+/** Caustic light network for the spa scene (LITE stand-in for the caustics shader), plus rising steam on tiers 1–3. */
 export function Caustics({ className = "" }: { className?: string }) {
   return (
+    <>
     <svg className={`tp-caustics ${className}`} aria-hidden="true" focusable="false" width="100%" height="100%">
       <defs>
         <pattern id="tp-caustic-tile" width="240" height="240" patternUnits="userSpaceOnUse" patternTransform="scale(1.7) rotate(-8)">
@@ -220,6 +221,12 @@ export function Caustics({ className = "" }: { className?: string }) {
       </defs>
       <rect width="100%" height="100%" fill="url(#tp-caustic-tile)" />
     </svg>
+    <div className="tp-steam-rise" aria-hidden="true">
+      {[0, 1, 2, 3, 4].map((k) => (
+        <span key={k} />
+      ))}
+    </div>
+    </>
   );
 }
 

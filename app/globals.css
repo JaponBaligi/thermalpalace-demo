@@ -633,6 +633,15 @@ html.lenis body {
     scale: 1 1;
   }
 
+  /* solid (bone) header: matte black ink so links, wordmark and controls stay readable */
+  .tp-header[data-solid="true"] :is(.tp-nav a, .tp-header-phone, .tp-menu-btn, .tp-mark-name, .tp-lang a[aria-current="true"]) {
+    color: #1f2224;
+  }
+
+  .tp-header[data-solid="true"] :is(.tp-mark-line, .tp-lang a) {
+    color: #4a4f50;
+  }
+
   .tp-header-end {
     display: flex;
     align-items: center;
@@ -1252,11 +1261,6 @@ html.lenis body {
     padding-block-start: clamp(10rem, 18vw, 14rem);
   }
 
-  /* with WebGL the canvas water continues under the top of S2 and sinks into petrol */
-  html[data-gl="on"] .tp-pools-scene {
-    background: linear-gradient(180deg, rgb(233 228 218 / 0) 0, rgb(233 228 218 / 0.22) 2.5rem, rgb(233 228 218 / 0.55) 5rem, rgb(233 228 218 / 0.84) 8rem, var(--color-slate) 11rem, var(--color-slate) 70%, var(--color-slate-soft) 100%);
-  }
-
   .tp-rays {
     position: absolute;
     inset-block-start: 11rem;
@@ -1778,9 +1782,12 @@ html.lenis body {
   .tp-map {
     overflow: hidden;
     aspect-ratio: 3 / 2;
+    border: 3px solid var(--tp-gold-matte);
     border-radius: 1.25rem;
     background: #1e2326;
-    box-shadow: 0 40px 60px -40px rgb(0 0 0 / 0.6);
+    box-shadow:
+      inset 0 0 0 1px rgb(20 23 26 / 0.35),
+      0 40px 60px -40px rgb(0 0 0 / 0.6);
   }
 
   .tp-map img {
@@ -2155,16 +2162,21 @@ html.intro-on .tp-intro {
   z-index: 90;
   display: grid;
   place-items: center;
-  background: radial-gradient(90% 70% at 50% 60%, #2a3133 0%, var(--color-slate) 55%, var(--color-slate-soft) 100%);
+  /* matte: same slate, flattened and desaturated, with a soft vignette */
+  background:
+    radial-gradient(120% 95% at 50% 55%, rgb(14 16 18 / 0) 45%, rgb(14 16 18 / 0.42) 100%),
+    radial-gradient(90% 70% at 50% 60%, #2b3030 0%, #282d2e 55%, #202425 100%);
   pointer-events: none;
   contain: strict;
-  animation:
-    tp-intro-drain 750ms 2450ms var(--ease-io) forwards,
-    tp-intro-end 1ms 3200ms forwards;
+  transition:
+    opacity 900ms var(--ease-io),
+    visibility 0s 900ms;
 }
 
+/* the boot script sets intro-done after 2.4 s (or on first input): one smooth fade, no snap */
 html.intro-on.intro-done .tp-intro {
-  animation: tp-intro-fade 250ms forwards;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .tp-intro-stage {
@@ -2270,24 +2282,6 @@ html.js-motion .tp-reveal:not(.is-visible) {
 
 /* ---------- keyframes ---------- */
 
-@keyframes tp-intro-end {
-  to {
-    visibility: hidden;
-  }
-}
-
-@keyframes tp-intro-fade {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-@keyframes tp-intro-drain {
-  to {
-    clip-path: inset(100% 0 0 0);
-  }
-}
 
 @keyframes tp-intro-sink {
   to {
@@ -2521,8 +2515,8 @@ html.js-motion .tp-reveal:not(.is-visible) {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgb(20 23 26 / 0.78) 0%, rgb(20 23 26 / 0.45) 55%, rgb(20 23 26 / 0.62) 100%),
-      linear-gradient(180deg, rgb(20 23 26 / 0.55) 0%, rgb(20 23 26 / 0) 30%, rgb(20 23 26 / 0) 65%, rgb(42 49 51 / 0.92) 100%);
+      linear-gradient(90deg, rgb(20 23 26 / 0.72) 0%, rgb(20 23 26 / 0.4) 55%, rgb(20 23 26 / 0.56) 100%),
+      linear-gradient(180deg, rgb(20 23 26 / 0.5) 0%, rgb(20 23 26 / 0) 30%, rgb(20 23 26 / 0) 65%, rgb(42 49 51 / 0.92) 100%);
   }
 
   html[data-gl="on"] .tp-hero-photo img {
@@ -2581,5 +2575,304 @@ html.js-motion .tp-reveal:not(.is-visible) {
     text-decoration: underline;
     text-underline-offset: 0.2em;
     overflow-wrap: anywhere;
+  }
+}
+
+/* ---------- a6: S1 photo, pools showcase, spa steam, closing viewport, maps ---------- */
+
+@layer components {
+  :root {
+    --tp-gold-matte: #a88b57;
+  }
+
+  /* S1: the forest photo under a dark veil (replaces the water video) */
+  .tp-s1-photo {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+  }
+
+  .tp-s1-photo img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: 50% 70%;
+    scale: -1 1;
+  }
+
+  .tp-s1-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(20 23 26 / 0.7) 0%, rgb(20 23 26 / 0.62) 60%, rgb(30 35 38 / 0.94) 100%);
+  }
+
+  /* S2 showcase */
+  .tp-pools-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .tp-pools-bg span {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 1400ms var(--ease-io);
+  }
+
+  .tp-pools-bg span[data-on] {
+    opacity: 1;
+  }
+
+  .tp-pools-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(20 23 26 / 0.74) 0%, rgb(20 23 26 / 0.5) 45%, rgb(20 23 26 / 0.84) 100%);
+    opacity: 0;
+    transition: opacity 1400ms var(--ease-io);
+  }
+
+  [data-active] > .tp-pools-bg::after {
+    opacity: 1;
+  }
+
+  .tp-pools-head {
+    position: relative;
+  }
+
+  .tp-pools-head > :not(.tp-pools-fly) {
+    transition: opacity 700ms var(--ease-io);
+  }
+
+  [data-active] .tp-pools-head > :not(.tp-pools-fly) {
+    opacity: 0;
+  }
+
+  .tp-pools-fly {
+    position: absolute;
+    inset-inline: 0;
+    margin: 0;
+    color: var(--color-bone);
+    transform-origin: 0 0;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 1200ms var(--ease-liquid),
+      opacity 450ms 750ms;
+  }
+
+  [data-active] .tp-pools-fly {
+    opacity: 1;
+    transition:
+      transform 1200ms var(--ease-liquid),
+      opacity 450ms;
+  }
+
+  .tp-pool {
+    position: relative;
+    transition:
+      border-color 600ms var(--ease-liquid),
+      translate 700ms var(--ease-liquid),
+      opacity 700ms var(--ease-io),
+      background-color 700ms var(--ease-io);
+  }
+
+  .tp-pool .tp-h3 {
+    transition: opacity 450ms 750ms;
+  }
+
+  .tp-pool[data-active] {
+    border-color: rgb(200 135 58 / 0.7);
+    background-color: rgb(20 23 26 / 0.6);
+    translate: 0 -6px;
+  }
+
+  .tp-pool[data-active] .tp-h3 {
+    opacity: 0;
+    transition-delay: 0s;
+  }
+
+  [data-active] .tp-pool:not([data-active]) {
+    opacity: 0.55;
+  }
+
+  .tp-pool-hit {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border: 0;
+    border-radius: inherit;
+    background: none;
+    cursor: pointer;
+  }
+
+  /* pinned (tiers 1–3, wide): one viewport holds the scene, scrolling walks the cards */
+  .tp-pools-scene[data-pin] {
+    block-size: calc(100svh + (var(--pool-n, 4) + 1) * 70svh);
+    padding-block: 0;
+  }
+
+  .tp-pools-scene[data-pin] .tp-pools-sticky {
+    position: sticky;
+    inset-block-start: 0;
+    display: grid;
+    align-content: center;
+    block-size: 100svh;
+    padding-block: calc(var(--header-h) + 1rem) 1.5rem;
+    overflow: hidden;
+  }
+
+  .tp-pools-scene[data-pin] .tp-scene-head {
+    margin-block-end: 2rem;
+  }
+
+  .tp-pools-scene[data-pin] .tp-plate {
+    aspect-ratio: 16 / 8;
+  }
+
+  .tp-pools-scene[data-pin] .tp-pool:nth-child(even) {
+    margin-block-start: 0;
+  }
+
+  .tp-pools-scene[data-pin] .tp-scene-link {
+    margin-block-start: 1.5rem;
+  }
+
+  /* S3 / spa page: steam rising (tiers 1–3 only; lite stays still) */
+  .tp-steam-rise {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    display: none;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  html:not([data-quality="lite"]) .tp-steam-rise {
+    display: block;
+  }
+
+  .tp-steam-rise span {
+    position: absolute;
+    inset-block-end: -40vh;
+    inset-inline-start: var(--x);
+    inline-size: var(--w);
+    aspect-ratio: 3 / 4;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(233 228 218 / 0.075), rgb(233 228 218 / 0.025) 55%, transparent);
+    opacity: 0;
+    animation: tp-steam-up var(--t) linear var(--d) infinite;
+  }
+
+  .tp-steam-rise span:nth-child(1) { --x: 6%; --w: 26rem; --t: 24s; --d: 0s; --dx: 4rem; }
+  .tp-steam-rise span:nth-child(2) { --x: 34%; --w: 32rem; --t: 30s; --d: -9s; --dx: -3rem; }
+  .tp-steam-rise span:nth-child(3) { --x: 62%; --w: 24rem; --t: 22s; --d: -15s; --dx: 5rem; }
+  .tp-steam-rise span:nth-child(4) { --x: 80%; --w: 30rem; --t: 28s; --d: -4s; --dx: -4rem; }
+  .tp-steam-rise span:nth-child(5) { --x: 20%; --w: 22rem; --t: 26s; --d: -20s; --dx: 3rem; }
+
+  html[data-quality="1"] .tp-steam-rise span:nth-child(n + 4) {
+    display: none;
+  }
+
+  /* closing call block + footer fill exactly one viewport (FooterFit publishes --footer-h) */
+  .tp-copper {
+    display: grid;
+    align-content: center;
+    min-block-size: max(18rem, calc(100svh - var(--footer-h, 0px)));
+    padding-block: 1.5rem;
+  }
+
+  .tp-copper-title {
+    font-size: min(clamp(5rem, 3rem + 12vw, 13rem), 13svh);
+  }
+
+  .tp-copper-title-sm {
+    font-size: min(clamp(3.5rem, 2rem + 8vw, 8rem), 10svh);
+  }
+
+  .tp-copper-phone {
+    min-block-size: 0;
+    margin-block-start: 0.25rem;
+    font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+  }
+
+  .tp-copper-text {
+    margin-block-start: 0.4rem;
+  }
+
+  .tp-copper .tp-btn-row {
+    margin-block-start: 1rem;
+  }
+
+  .tp-footer {
+    padding-block: clamp(2rem, 3.5vw, 3rem) 1rem;
+  }
+
+  .tp-footer-base {
+    gap: 0.25rem 2rem;
+    margin-block-start: 1.5rem;
+    padding-block-start: 1rem;
+  }
+
+  /* maps: matte gold frame + directions */
+  .tp-map-block {
+    display: grid;
+    justify-items: start;
+    gap: 1.25rem;
+  }
+
+  .tp-map-block > .tp-map {
+    inline-size: 100%;
+  }
+
+  .tp-btn-gold {
+    border-color: var(--tp-gold-matte);
+    color: var(--color-bone);
+  }
+
+  .tp-btn-gold:hover {
+    background: var(--tp-gold-matte);
+    color: var(--color-basalt);
+  }
+}
+
+@keyframes tp-steam-up {
+  0% {
+    opacity: 0;
+    translate: 0 0;
+    scale: 0.7;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    translate: var(--dx) -150vh;
+    scale: 1.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tp-pools-bg span,
+  .tp-pools-bg::after,
+  .tp-pools-fly,
+  .tp-pools-head > *,
+  .tp-pool,
+  .tp-pool .tp-h3 {
+    transition-duration: 1ms !important;
+    transition-delay: 0s !important;
+  }
+
+  .tp-steam-rise {
+    display: none !important;
   }
 }

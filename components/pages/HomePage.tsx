@@ -2,7 +2,8 @@ import { anchors, routes, type Locale } from "@/content/routes";
 import { t } from "@/content";
 import { site } from "@/content/site";
 import { phoneText, telLink } from "@/lib/contact";
-import { WaterVideo } from "../WaterVideo";
+import { PoolsShowcase } from "../PoolsShowcase";
+import { pools } from "@/content/spa";
 import { MapBlock } from "../MapBlock";
 import { FacilityList, PoolCards, Sessions, UnitCards, UnitFeatures } from "../sections";
 import { ArrowIcon, Caustics, delay, Kicker, NewTab, PhoneIcon, PinIcon, Rich, Ridges, WaterLine, WhatsAppPending } from "../ui";
@@ -87,7 +88,10 @@ export function HomePage({ locale }: { locale: Locale }) {
 
       {/* S1 — surface: practical strip */}
       <section className="tp-scene tp-surface" data-scene="1" aria-labelledby="tp-s1-h">
-        <WaterVideo />
+        <div className="tp-s1-photo" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element -- static export, pre-sized WebP */}
+          <img src="/images/termal-orman-1304.webp" srcSet="/images/termal-orman-1000.webp 1000w, /images/termal-orman-1304.webp 1304w" sizes="100vw" alt="" width={1304} height={1150} loading="lazy" decoding="async" />
+        </div>
         <div className="tp-wrap tp-surface-grid">
           <div className="tp-reveal">
             <Kicker depth={depth[1]}>{h.surface.kicker}</Kicker>
@@ -140,22 +144,25 @@ export function HomePage({ locale }: { locale: Locale }) {
       {/* S2 — pools, under water */}
       <section id={a.pools} className="tp-scene tp-pools-scene tp-dark" data-scene="2" aria-labelledby="tp-s2-h">
         <div className="tp-rays" aria-hidden="true" />
-        <div className="tp-wrap">
-          <div className="tp-scene-head tp-reveal">
-            <Kicker depth={depth[2]}>{h.pools.kicker}</Kicker>
-            <h2 id="tp-s2-h" className="tp-h2 tp-h2-xl">
-              {h.pools.heading}
-            </h2>
-            <p className="tp-lead">{h.pools.text}</p>
+        <PoolsShowcase ids={pools.map((p) => p.id)} names={pools.map((p) => p.name[locale])}>
+          <div className="tp-wrap">
+            <div className="tp-scene-head tp-pools-head tp-reveal">
+              <Kicker depth={depth[2]}>{h.pools.kicker}</Kicker>
+              <h2 id="tp-s2-h" className="tp-h2 tp-h2-xl">
+                {h.pools.heading}
+              </h2>
+              <p className="tp-lead">{h.pools.text}</p>
+              <p className="tp-h2 tp-h2-xl tp-pools-fly" aria-hidden="true" />
+            </div>
+            <PoolCards locale={locale} interactive />
+            <p className="tp-scene-link tp-reveal">
+              <a href={r.spa} className="tp-link tp-link-light">
+                <span>{h.pools.link}</span>
+                <ArrowIcon />
+              </a>
+            </p>
           </div>
-          <PoolCards locale={locale} />
-          <p className="tp-scene-link tp-reveal">
-            <a href={r.spa} className="tp-link tp-link-light">
-              <span>{h.pools.link}</span>
-              <ArrowIcon />
-            </a>
-          </p>
-        </div>
+        </PoolsShowcase>
       </section>
 
       {/* S3 — spa, light through water */}
@@ -233,7 +240,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             </div>
           </div>
           <div className="tp-reveal" style={delay(120)}>
-            <MapBlock alt={c.contactPage.mapAlt} label={c.contactPage.mapLabel} />
+            <MapBlock alt={c.contactPage.mapAlt} label={c.contactPage.mapLabel} locale={locale} />
           </div>
         </div>
         <Ridges />

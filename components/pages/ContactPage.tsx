@@ -88,7 +88,7 @@ export function ContactPage({ locale }: { locale: Locale }) {
             {p.mapHeading}
           </h2>
           <div className="tp-reveal">
-            <MapBlock alt={p.mapAlt} label={p.mapLabel} className="tp-map-wide" />
+            <MapBlock alt={p.mapAlt} label={p.mapLabel} locale={locale} className="tp-map-wide" />
           </div>
         </div>
         <Ridges />
