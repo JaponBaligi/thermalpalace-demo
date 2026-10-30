@@ -2496,17 +2496,51 @@ html.js-motion .tp-reveal:not(.is-visible) {
 }
 
 @layer components {
-  /* S0 footage: dark water loop (Pexels, see /gorsel-kaynaklari); poster first, video only on capable tiers.
-     LITE: the element itself shows. WebGL: once it plays the shader samples it as a texture and the element
-     fades out, so the canvas (refraction + steam) reads through the hero; the gradient keeps text contrast. */
-  .tp-hero-video {
+  /* S0 photo: Termal forest (CC BY-SA 3.0, see /gorsel-kaynaklari), pre-darkened; sits under the steam.
+     LITE: over the dark gradient, CSS steam above it. WebGL: the hero paints above the fixed canvas, so the
+     photo drops to half opacity and the shader water and steam read through it. */
+  .tp-hero-photo {
     position: absolute;
     inset: 0;
     z-index: -2;
     pointer-events: none;
   }
 
-  .tp-hero-video video {
+  .tp-hero-photo img {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: 35% 40%;
+    opacity: 0.8;
+    transition: opacity 900ms var(--ease-liquid);
+  }
+
+  .tp-hero-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgb(20 23 26 / 0.78) 0%, rgb(20 23 26 / 0.45) 55%, rgb(20 23 26 / 0.62) 100%),
+      linear-gradient(180deg, rgb(20 23 26 / 0.55) 0%, rgb(20 23 26 / 0) 30%, rgb(20 23 26 / 0) 65%, rgb(42 49 51 / 0.92) 100%);
+  }
+
+  html[data-gl="on"] .tp-hero-photo img {
+    opacity: 0.5;
+  }
+
+  /* Below-hero water: dark footage loop (Pexels, see /gorsel-kaynaklari) in S1. LITE / reduced motion: the
+     poster under the dark gradient. WebGL: the shader samples the playing clip as its water from the hero's
+     lower half down, so only the <video> is hidden; the flat
+     overlay darkens poster and canvas alike for text contrast. */
+  .tp-water-video {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+  }
+
+  .tp-water-video video {
     display: block;
     inline-size: 100%;
     block-size: 100%;
@@ -2514,16 +2548,14 @@ html.js-motion .tp-reveal:not(.is-visible) {
     transition: opacity 900ms var(--ease-liquid);
   }
 
-  .tp-hero-video::after {
+  .tp-water-video::after {
     content: "";
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(90deg, rgb(20 23 26 / 0.7) 0%, rgb(20 23 26 / 0.3) 55%, rgb(20 23 26 / 0.5) 100%),
-      linear-gradient(180deg, rgb(20 23 26 / 0.45) 0%, rgb(20 23 26 / 0) 30%, rgb(20 23 26 / 0) 65%, rgb(42 49 51 / 0.92) 100%);
+    background: rgb(20 23 26 / 0.62);
   }
 
-  html[data-gl="on"][data-hero-video="live"] .tp-hero-video video {
+  html[data-gl="on"] .tp-water-video video {
     opacity: 0;
   }
 

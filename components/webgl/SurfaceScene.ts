@@ -281,10 +281,10 @@ export class SurfaceScene {
   private videoTex: VideoTexture | null = null;
   private videoMix = 0;
 
-  /** Hero footage (HeroVideo) sampled as a texture once it plays; fades out as the camera descends to S1. */
+  /** Water footage (WaterVideo) sampled as a texture once it plays; fades in as the camera descends past the hero. */
   private updateVideo(dt: number, descent: number) {
     const w = this.water.material.uniforms;
-    this.video ??= document.querySelector<HTMLVideoElement>(".tp-hero-video video");
+    this.video ??= document.querySelector<HTMLVideoElement>(".tp-water-video video");
     const v = this.video;
     const live = !!v && !v.paused && v.readyState >= 2;
     if (live && !this.videoTex) {
@@ -293,12 +293,9 @@ export class SurfaceScene {
     }
     const k = Math.min(1, dt / 0.9);
     this.videoMix += ((live ? 1 : 0) - this.videoMix) * k;
-    w.uVideoMix.value = this.videoTex ? this.videoMix * (1 - Math.min(1, Math.max(0, (descent - 0.55) / 0.4))) : 0;
+    w.uVideoMix.value = this.videoTex ? this.videoMix * Math.min(1, Math.max(0, (descent - 0.25) / 0.5)) : 0;
     const va = 16 / 9;
     (w.uVidScale.value as Vector2).set(this.aspect > va ? 1 : this.aspect / va, this.aspect > va ? va / this.aspect : 1);
-    const root = document.documentElement;
-    if (live) root.dataset.heroVideo = "live";
-    else delete root.dataset.heroVideo;
   }
 
   render(f: Frame) {

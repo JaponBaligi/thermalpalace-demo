@@ -5,10 +5,10 @@ import { useEffect, useRef } from "react";
 const BASE = "/video/hero-water";
 
 /**
- * S0 background footage. The poster paints first; the clip loads after `load` + idle, only once a non-LITE tier
- * is set and without reduced motion or Save-Data, and plays only while the hero is on screen.
+ * Below-hero water footage (S1). The poster paints first; the clip loads after `load` + idle, only once a non-LITE tier
+ * is set and without reduced motion or Save-Data, and plays only while S1 is near the screen.
  */
-export function HeroVideo() {
+export function WaterVideo() {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -29,10 +29,13 @@ export function HeroVideo() {
       const av1 = v.canPlayType('video/webm; codecs="av01.0.08M.10"') !== "";
       v.muted = true;
       v.src = `${BASE}-${h}.${av1 ? "webm" : "mp4"}`;
-      io = new IntersectionObserver(([e]) => {
-        if (e.isIntersecting) v.play().catch(() => {});
-        else v.pause();
-      });
+      io = new IntersectionObserver(
+        ([e]) => {
+          if (e.isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        },
+        { rootMargin: "100% 0px" },
+      );
       io.observe(v);
     };
     const mo = new MutationObserver(start);
@@ -58,7 +61,7 @@ export function HeroVideo() {
   }, []);
 
   return (
-    <div className="tp-hero-video" aria-hidden="true">
+    <div className="tp-water-video" aria-hidden="true">
       <video ref={ref} poster={`${BASE}-poster.webp`} muted loop playsInline preload="none" disablePictureInPicture tabIndex={-1} />
     </div>
   );

@@ -2,7 +2,7 @@ import { anchors, routes, type Locale } from "@/content/routes";
 import { t } from "@/content";
 import { site } from "@/content/site";
 import { phoneText, telLink } from "@/lib/contact";
-import { HeroVideo } from "../HeroVideo";
+import { WaterVideo } from "../WaterVideo";
 import { MapBlock } from "../MapBlock";
 import { FacilityList, PoolCards, Sessions, UnitCards, UnitFeatures } from "../sections";
 import { ArrowIcon, Caustics, delay, Kicker, NewTab, PhoneIcon, PinIcon, Rich, Ridges, WaterLine, WhatsAppPending } from "../ui";
@@ -18,7 +18,20 @@ export function HomePage({ locale }: { locale: Locale }) {
     <>
       {/* S0 — steam */}
       <section className="tp-hero" data-scene="0" aria-labelledby="tp-hero-h">
-        <HeroVideo />
+        <div className="tp-hero-photo" aria-hidden="true">
+          {/* static export: pre-sized WebP, no next/image optimiser */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/termal-orman-1304.webp"
+            srcSet="/images/termal-orman-1000.webp 1000w, /images/termal-orman-1304.webp 1304w"
+            sizes="100vw"
+            width={1304}
+            height={1150}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+          />
+        </div>
         <div className="tp-steam" aria-hidden="true">
           <span />
           <span />
@@ -74,6 +87,7 @@ export function HomePage({ locale }: { locale: Locale }) {
 
       {/* S1 — surface: practical strip */}
       <section className="tp-scene tp-surface" data-scene="1" aria-labelledby="tp-s1-h">
+        <WaterVideo />
         <div className="tp-wrap tp-surface-grid">
           <div className="tp-reveal">
             <Kicker depth={depth[1]}>{h.surface.kicker}</Kicker>
