@@ -14,7 +14,6 @@ export function attachDebug(scene: SurfaceScene, info: () => { tier: number; rip
   const p = scene.params;
   const look = gui.addFolder("Surface");
   look.add(p, "descentOverride", -1, 1, 0.01).name("descent (-1 = scroll)");
-  look.add(p, "density", 0, 2, 0.01).name("steam density");
   look.add(p, "waveAmp", 0, 3, 0.01).name("wave amplitude");
   look.add(p, "rippleGain", 0, 2, 0.01).name("ripple gain (sim)");
   look.add(p, "damping", 0.95, 0.999, 0.001).name("ripple damping (sim)");

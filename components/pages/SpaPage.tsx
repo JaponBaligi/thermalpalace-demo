@@ -6,6 +6,8 @@ import { FacilityList, PoolCards, Sessions } from "../sections";
 import { PhoneIcon, Rich, WhatsAppPending } from "../ui";
 import { SpaWater } from "../SpaWater";
 import { PageHero } from "./PageHero";
+import { PoolsShowcase } from "../PoolsShowcase";
+import { pools } from "@/content/spa";
 
 export function SpaPage({ locale }: { locale: Locale }) {
   const c = t(locale);
@@ -16,15 +18,20 @@ export function SpaPage({ locale }: { locale: Locale }) {
 
       <section className="tp-scene tp-pools-scene tp-dark" data-scene="2" aria-labelledby="tp-pools-h">
         <div className="tp-rays" aria-hidden="true" />
-        <div className="tp-wrap">
-          <h2 id="tp-pools-h" className="tp-h2 tp-h2-xl tp-reveal">
-            {p.poolsHeading}
-          </h2>
-          <PoolCards locale={locale} />
-          <p className="tp-scene-ph tp-reveal">
-            <Rich text={p.poolsRules} locale={locale} />
-          </p>
-        </div>
+        <PoolsShowcase ids={pools.map((x) => x.id)} names={pools.map((x) => x.name[locale])}>
+          <div className="tp-wrap">
+            <div className="tp-scene-head tp-pools-head tp-reveal">
+              <h2 id="tp-pools-h" className="tp-h2 tp-h2-xl">
+                {p.poolsHeading}
+              </h2>
+              <p className="tp-h2 tp-h2-xl tp-pools-fly" aria-hidden="true" />
+            </div>
+            <PoolCards locale={locale} interactive />
+            <p className="tp-scene-ph tp-scene-link tp-reveal">
+              <Rich text={p.poolsRules} locale={locale} />
+            </p>
+          </div>
+        </PoolsShowcase>
       </section>
 
       <section className="tp-scene tp-spa-scene tp-spa-rise tp-dark" data-scene="3" aria-labelledby="tp-spa-h">

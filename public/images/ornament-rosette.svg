@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="-60 -60 120 120">
+  <!-- Original matte-gold medallion centred on the map frame's top and bottom bands. -->
+  <circle r="57" fill="#16191c" stroke="#8f7445" stroke-width="2"/>
+  <g fill="#a88b57">
+    <circle cy="-50" r="3" transform="rotate(30)"/><circle cy="-50" r="3" transform="rotate(60)"/><circle cy="-50" r="3" transform="rotate(90)"/><circle cy="-50" r="3" transform="rotate(120)"/><circle cy="-50" r="3" transform="rotate(150)"/><circle cy="-50" r="3" transform="rotate(180)"/>
+    <circle cy="-50" r="3" transform="rotate(210)"/><circle cy="-50" r="3" transform="rotate(240)"/><circle cy="-50" r="3" transform="rotate(270)"/><circle cy="-50" r="3" transform="rotate(300)"/><circle cy="-50" r="3" transform="rotate(330)"/>
+  </g>
+  <circle r="42" fill="none" stroke="#a88b57" stroke-width="2.4"/>
+  <g fill="#a88b57">
+    <path d="M0-38C9-28 9-16 0-8C-9-16-9-28 0-38Z"/><path d="M0-38C9-28 9-16 0-8C-9-16-9-28 0-38Z" transform="rotate(45)"/><path d="M0-38C9-28 9-16 0-8C-9-16-9-28 0-38Z" transform="rotate(90)"/><path d="M0-38C9-28 9-16 0-8C-9-16-9-28 0-38Z" transform="rotate(135)"/>
+    <path d="M0-38C9-28 9-16 0-8C-9-16-9-28 0-38Z" transform="rotate(180)"/><path d="M0-38C9-28 9-16 0-8C-9-16-9-28 0-38Z" transform="rotate(225)"/><path d="M0-38C9-28 9-16 0-8C-9-16-9-28 0-38Z" transform="rotate(270)"/><path d="M0-38C9-28 9-16 0-8C-9-16-9-28 0-38Z" transform="rotate(315)"/>
+  </g>
+  <g fill="#8f7445"><path d="M0-30C5-24 5-18 0-14C-5-18-5-24 0-30Z" transform="rotate(22.5)"/><path d="M0-30C5-24 5-18 0-14C-5-18-5-24 0-30Z" transform="rotate(112.5)"/><path d="M0-30C5-24 5-18 0-14C-5-18-5-24 0-30Z" transform="rotate(202.5)"/><path d="M0-30C5-24 5-18 0-14C-5-18-5-24 0-30Z" transform="rotate(292.5)"/></g>
+  <circle r="9" fill="#16191c" stroke="#a88b57" stroke-width="2.4"/><circle r="4" fill="#b89c68"/>
+</svg>

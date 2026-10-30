@@ -17,7 +17,6 @@ import {
 } from "./three";
 import type { Tier, TierSettings } from "@/lib/quality";
 import { fullscreenVert } from "./shaders/fullscreen";
-import { steamFrag } from "./shaders/steam";
 import { waterFrag } from "./shaders/water";
 import { rippleFrag } from "./shaders/ripple";
 import { compositeFrag } from "./shaders/composite";
@@ -50,7 +49,6 @@ const RIPPLE_RECT = new Vector3(0, -2.2, 3.2);
 
 /** Tunables exposed in the ?debug panel. */
 export type SurfaceParams = {
-  density: number;
   waveAmp: number;
   rippleGain: number;
   damping: number;
@@ -60,14 +58,12 @@ export type SurfaceParams = {
 };
 
 export class SurfaceScene {
-  readonly params: SurfaceParams = { density: 1, waveAmp: 1, rippleGain: 0.9, damping: 0.986, grain: 0.03, bloom: 0.45, descentOverride: -1 };
+  readonly params: SurfaceParams = { waveAmp: 1, rippleGain: 0.9, damping: 0.986, grain: 0.03, bloom: 0.45, descentOverride: -1 };
   private readonly camera = new Camera();
   private readonly geometry = new BufferGeometry();
-  private readonly steam: Pass;
   private readonly water: Pass;
   private readonly composite: Pass | null = null;
   private readonly ripple: Pass | null = null;
-  private readonly steamRT: WebGLRenderTarget;
   private readonly sceneRT: WebGLRenderTarget | null = null;
   private simA: WebGLRenderTarget | null = null;
   private simB: WebGLRenderTarget | null = null;
@@ -97,21 +93,6 @@ export class SurfaceScene {
     if (this.rippleMode === "analytic") defines.RIPPLE_ANALYTIC = 1;
     if (settings.post === "grain") defines.POST_GRAIN = 1;
 
-    this.steamRT = new WebGLRenderTarget(1, 1, { minFilter: LinearFilter, magFilter: LinearFilter, depthBuffer: false });
-
-    this.steam = this.pass(steamFrag, defines, {
-      uTime: { value: 0 },
-      uAspect: { value: 1 },
-      uScroll: { value: 0 },
-      uDescent: { value: 0 },
-      uHorizon: { value: 0.18 },
-      uMouse: { value: new Vector2(0.5, 0.5) },
-      uMouseVel: { value: new Vector2() },
-      uMouseAmt: { value: 0 },
-      uDensity: { value: 1 },
-      uLightDir: { value: new Vector2(0.5, 0.85).normalize() },
-    });
-
     const waterUniforms: Uniforms = {
       uRes: { value: new Vector2(1, 1) },
       uTime: { value: 0 },
@@ -122,7 +103,6 @@ export class SurfaceScene {
       uCamUp: { value: this.cam.up },
       uCamRight: { value: this.cam.right },
       uSunDir: { value: new Vector3(0.72, 0.17, -1).normalize() },
-      uSteam: { value: this.steamRT.texture },
       uWaveAmp: { value: 1 },
     };
     if (this.rippleMode === "sim") {
@@ -181,19 +161,18 @@ export class SurfaceScene {
 
   /** Compiles one program per task so no single long task blocks input (KHR_parallel_shader_compile when available). */
   async compile(yieldToMain: () => Promise<void>) {
-    for (const p of [this.ripple, this.steam, this.water, this.composite]) {
+    for (const p of [this.ripple, this.water, this.composite]) {
       if (!p) continue;
       await this.renderer.compileAsync(p.scene, this.camera);
       await yieldToMain();
     }
   }
 
-  /** Sizes in CSS pixels; `dpr` is the clamped device pixel ratio, `renderScale` the steam buffer scale. */
-  setSize(width: number, height: number, dpr: number, renderScale: number) {
+  /** Sizes in CSS pixels; `dpr` is the clamped device pixel ratio. */
+  setSize(width: number, height: number, dpr: number) {
     this.aspect = width / Math.max(1, height);
     const bw = Math.max(1, Math.round(width * dpr));
     const bh = Math.max(1, Math.round(height * dpr));
-    this.steamRT.setSize(Math.max(1, Math.round(width * renderScale)), Math.max(1, Math.round(height * renderScale)));
     this.sceneRT?.setSize(bw, bh);
     (this.water.material.uniforms.uRes.value as Vector2).set(bw, bh);
     if (this.composite) (this.composite.material.uniforms.uRes.value as Vector2).set(bw, bh);
@@ -275,20 +254,9 @@ export class SurfaceScene {
 
   render(f: Frame) {
     const descent = this.params.descentOverride >= 0 ? this.params.descentOverride : f.descent;
-    const horizon = this.updateCamera(descent, f.time);
+    this.updateCamera(descent, f.time);
     this.emitRipples(f);
     this.stepSim(f.dt);
-
-    const s = this.steam.material.uniforms;
-    s.uTime.value = f.time;
-    s.uAspect.value = this.aspect;
-    s.uScroll.value = f.scroll;
-    s.uDescent.value = descent;
-    s.uHorizon.value = horizon;
-    (s.uMouse.value as Vector2).copy(f.mouse);
-    (s.uMouseVel.value as Vector2).copy(f.mouseVel);
-    s.uMouseAmt.value = f.mouseAmt;
-    s.uDensity.value = this.params.density;
 
     const w = this.water.material.uniforms;
     w.uTime.value = f.time;
@@ -296,8 +264,6 @@ export class SurfaceScene {
     w.uWaveAmp.value = this.params.waveAmp;
 
     const r = this.renderer;
-    r.setRenderTarget(this.steamRT);
-    r.render(this.steam.scene, this.camera);
     if (this.composite && this.sceneRT) {
       r.setRenderTarget(this.sceneRT);
       r.render(this.water.scene, this.camera);
@@ -315,9 +281,8 @@ export class SurfaceScene {
   }
 
   dispose() {
-    for (const p of [this.steam, this.water, this.composite, this.ripple]) p?.material.dispose();
+    for (const p of [this.water, this.composite, this.ripple]) p?.material.dispose();
     this.geometry.dispose();
-    this.steamRT.dispose();
     this.sceneRT?.dispose();
     this.simA?.dispose();
     this.simB?.dispose();

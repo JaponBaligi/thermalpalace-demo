@@ -42,7 +42,6 @@ export const en: SiteContent = {
       liteOn: "On",
       liteOff: "Off",
     },
-    scrollCue: "Descend",
     more: "More",
   },
 

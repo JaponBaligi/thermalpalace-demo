@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { getLitePreference, parseQualityOverride } from "@/lib/quality";
 
 const FALLBACK = "/images/termal-orman-1304.webp";
 
@@ -95,7 +96,10 @@ export function PoolsShowcase({ ids, names, children }: { ids: string[]; names: 
     };
 
     const mode = () => {
-      const next = wide.matches && !still.matches && html.dataset.quality !== "lite";
+      // inner pages report lite only because they host no WebGL scene; the showcase still pins there unless lite was chosen
+      const chosen = parseQualityOverride(location.search) === "lite" || getLitePreference();
+      const lite = html.dataset.quality === "lite" && (html.dataset.qualityReason !== "no-webgl-scene" || chosen);
+      const next = wide.matches && !still.matches && !lite;
       if (next === pinned) return;
       pinned = next;
       section.toggleAttribute("data-pin", pinned);
@@ -130,7 +134,7 @@ export function PoolsShowcase({ ids, names, children }: { ids: string[]; names: 
     io.observe(section);
 
     const mo = new MutationObserver(mode);
-    mo.observe(html, { attributes: true, attributeFilter: ["data-quality"] });
+    mo.observe(html, { attributes: true, attributeFilter: ["data-quality", "data-quality-reason"] });
     wide.addEventListener("change", mode);
     still.addEventListener("change", mode);
     root.addEventListener("click", onClick);

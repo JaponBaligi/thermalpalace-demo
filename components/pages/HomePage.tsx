@@ -34,11 +34,6 @@ export function HomePage({ locale }: { locale: Locale }) {
             decoding="async"
           />
         </div>
-        <div className="tp-steam" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
         <div className="tp-wrap tp-hero-inner">
           <p className="tp-eyebrow tp-enter" style={delay(0)}>
             {h.hero.eyebrow}
@@ -77,10 +72,6 @@ export function HomePage({ locale }: { locale: Locale }) {
               <li key={f}>{f}</li>
             ))}
           </ul>
-          <a href={`#${a.pools}`} className="tp-scroll-cue tp-enter" style={delay(640)}>
-            <span className="tp-scroll-line" aria-hidden="true" />
-            <span>{c.common.scrollCue}</span>
-          </a>
         </div>
         <div className="tp-surface-edge" aria-hidden="true">
           <WaterLine />

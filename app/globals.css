@@ -922,21 +922,8 @@ html.lenis body {
   }
 
   html[data-gl="on"] .tp-hero::before,
-  html[data-gl="on"] .tp-surface::before,
-  html[data-gl="on"] .tp-hero .tp-steam {
+  html[data-gl="on"] .tp-surface::before {
     opacity: 0;
-  }
-
-  /* the canvas replaces the CSS steam; stop its animations once it has faded out */
-  html[data-gl="on"] .tp-hero .tp-steam {
-    visibility: hidden;
-    transition:
-      opacity 900ms var(--ease-liquid),
-      visibility 0s 900ms;
-  }
-
-  html[data-gl="on"] .tp-hero .tp-steam span {
-    animation-play-state: paused;
   }
 
   .tp-hero-inner {
@@ -1003,10 +990,6 @@ html.lenis body {
     background: var(--color-amber);
   }
 
-  .tp-scroll-cue {
-    display: none;
-  }
-
   @media (min-width: 64rem) {
     .tp-hero-inner {
       grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -1030,78 +1013,6 @@ html.lenis body {
       align-self: end;
       padding-block-end: 0.75rem;
     }
-
-    .tp-scroll-cue {
-      position: absolute;
-      inset-inline-end: var(--gutter);
-      inset-block-start: 2.5rem;
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-      min-inline-size: 2.75rem;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      text-decoration: none;
-      writing-mode: vertical-rl;
-      color: var(--color-bone);
-    }
-
-    .tp-scroll-line {
-      inline-size: 1px;
-      block-size: 4.5rem;
-      background: linear-gradient(var(--color-slate), transparent);
-      transform-origin: top;
-      animation: tp-cue 2.8s var(--ease-liquid) infinite;
-    }
-  }
-
-  .tp-steam {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    overflow: hidden;
-    pointer-events: none;
-    transition: opacity 900ms var(--ease-liquid);
-  }
-
-  .tp-steam span {
-    position: absolute;
-    border-radius: 50%;
-    will-change: transform;
-  }
-
-  .tp-steam span:nth-child(1) {
-    inline-size: 75vmax;
-    block-size: 75vmax;
-    inset-inline-start: -25vmax;
-    inset-block-start: -35vmax;
-    background: radial-gradient(closest-side, rgb(233 228 218 / 0.07), rgb(233 228 218 / 0));
-    animation: tp-drift-a 34s ease-in-out infinite alternate;
-  }
-
-  .tp-steam span:nth-child(2) {
-    inline-size: 60vmax;
-    block-size: 60vmax;
-    inset-inline-end: -22vmax;
-    inset-block-start: 5vmax;
-    background: radial-gradient(closest-side, rgb(140 145 140 / 0.08), rgb(140 145 140 / 0));
-    animation: tp-drift-b 42s ease-in-out infinite alternate;
-  }
-
-  .tp-steam span:nth-child(3) {
-    inline-size: 55vmax;
-    block-size: 55vmax;
-    inset-inline-start: 25%;
-    inset-block-end: -38vmax;
-    background: radial-gradient(closest-side, rgb(200 135 58 / 0.1), rgb(200 135 58 / 0));
-    animation: tp-drift-c 38s ease-in-out infinite alternate;
-  }
-
-  .tp-steam-soft span:nth-child(1) {
-    opacity: 0.8;
   }
 
   .tp-surface-edge {
@@ -2330,37 +2241,6 @@ html.js-motion .tp-reveal:not(.is-visible) {
   }
 }
 
-@keyframes tp-drift-a {
-  to {
-    transform: translate3d(8vw, 6vh, 0) scale(1.12);
-  }
-}
-
-@keyframes tp-drift-b {
-  to {
-    transform: translate3d(-10vw, -4vh, 0) scale(0.92);
-  }
-}
-
-@keyframes tp-drift-c {
-  to {
-    transform: translate3d(-6vw, -10vh, 0) scale(1.08);
-  }
-}
-
-@keyframes tp-cue {
-  0% {
-    scale: 1 0;
-  }
-  50% {
-    scale: 1 1;
-  }
-  100% {
-    scale: 1 0;
-    transform-origin: bottom;
-  }
-}
-
 @keyframes tp-bob {
   0%,
   100% {
@@ -2754,6 +2634,44 @@ html.js-motion .tp-reveal:not(.is-visible) {
 
   .tp-map-block > .tp-map {
     inline-size: 100%;
+  }
+
+  /* original matte-gold ornament: 9-slice SVG band (corners + repeating scroll tiles), rosettes on top/bottom */
+  .tp-map-frame {
+    --band: clamp(14px, 2.4vw, 32px);
+    position: relative;
+    inline-size: 100%;
+    border: var(--band) solid transparent;
+    border-image: url(/images/ornament-frame.svg) 100 / var(--band) round;
+    background: #16191c;
+    box-shadow: 0 40px 60px -40px rgb(0 0 0 / 0.6);
+  }
+
+  .tp-map-frame > .tp-map {
+    isolation: isolate;
+    inline-size: 100%;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .tp-map-medal {
+    position: absolute;
+    inset-inline-start: 50%;
+    z-index: 1;
+    inline-size: calc(var(--band) * 1.8);
+    block-size: calc(var(--band) * 1.8);
+    translate: -50% 0;
+    background: url(/images/ornament-rosette.svg) center / contain no-repeat;
+    pointer-events: none;
+  }
+
+  .tp-map-medal-t {
+    inset-block-start: calc(var(--band) * -1.4);
+  }
+
+  .tp-map-medal-b {
+    inset-block-end: calc(var(--band) * -1.4);
   }
 
   .tp-btn-gold {

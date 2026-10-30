@@ -9,10 +9,14 @@ export function MapBlock({ alt, label, locale, className = "" }: { alt: string; 
   const c = t(locale).common;
   return (
     <div className="tp-map-block">
-      <LiveMap lat={site.geo.lat} lng={site.geo.lng} label={label} zoom={16} className={`tp-map ${className}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element -- static export, pre-sized WebP */}
-        <img src="/images/harita-thermalpalace.webp" alt={alt} width={1200} height={800} loading="lazy" decoding="async" />
-      </LiveMap>
+      <div className="tp-map-frame">
+        <LiveMap lat={site.geo.lat} lng={site.geo.lng} label={label} zoom={16} className={`tp-map ${className}`}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- static export, pre-sized WebP */}
+          <img src="/images/harita-thermalpalace.webp" alt={alt} width={1200} height={800} loading="lazy" decoding="async" />
+        </LiveMap>
+        <span className="tp-map-medal tp-map-medal-t" aria-hidden="true" />
+        <span className="tp-map-medal tp-map-medal-b" aria-hidden="true" />
+      </div>
       <a href={site.directionsUrl} target="_blank" rel="noopener noreferrer" className="tp-btn tp-btn-gold tp-map-dir">
         <PinIcon />
         <span>{c.directionsShort}</span>

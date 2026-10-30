@@ -19,7 +19,7 @@ const yieldToMain = () => {
 };
 
 /**
- * The single WebGL renderer and canvas (56 §6.6). Drives S0 steam and the S1 water surface behind the DOM.
+ * The single WebGL renderer and canvas (56 §6.6). Drives the S1 water surface behind the DOM.
  * RAF = gsap.ticker; renders only while the hero or the surface section is on screen, the tab is visible and
  * no menu covers the page. Returns null if WebGL2 setup fails; the LITE paint then simply stays.
  */
@@ -67,7 +67,7 @@ export async function createStage(host: HTMLElement, { tier, onFallback }: Optio
     const dpr = Math.min(window.devicePixelRatio || 1, settings.dprMax);
     renderer.setPixelRatio(dpr);
     renderer.setSize(width, height, false);
-    scene.setSize(width, height, dpr, settings.renderScale);
+    scene.setSize(width, height, dpr);
     measure();
   };
 

@@ -3,7 +3,7 @@ import { palette } from "./fullscreen";
 
 /**
  * S0/S1 scene pass: morning sky, the thermal water surface seen from a camera that tilts down as the page
- * descends, and the steam buffer on top. One ray per pixel against the plane y = 0 (no geometry).
+ * descends. One ray per pixel against the plane y = 0 (no geometry).
  * Defines: WAVES (3–6 sine waves), RIPPLE_SIM | RIPPLE_ANALYTIC, POST_GRAIN, OCTAVES (noise include).
  */
 export const waterFrag = /* glsl */ `
@@ -20,7 +20,6 @@ uniform vec3 uCamFwd;
 uniform vec3 uCamUp;
 uniform vec3 uCamRight;
 uniform vec3 uSunDir;
-uniform sampler2D uSteam;
 uniform float uWaveAmp;
 #ifdef RIPPLE_SIM
 uniform sampler2D uRipple;
@@ -128,8 +127,6 @@ void main() {
   }
 
   col = clamp(col, DEEP, CEIL);
-  vec4 steam = texture(uSteam, vUv);
-  col = col * (1.0 - steam.a) + steam.rgb;
 
 #ifdef POST_GRAIN
   vec2 vc = (vUv - 0.5) * vec2(uAspect, 1.0);

@@ -1,0 +1,84 @@
+import type { Locale } from "@/content/routes";
+import { t } from "@/content";
+import { telLink } from "@/lib/contact";
+import { ContactStrip } from "../ContactStrip";
+import { FacilityList, PoolCards, Sessions } from "../sections";
+import { PhoneIcon, Rich, WhatsAppPending } from "../ui";
+import { SpaWater } from "../SpaWater";
+import { PageHero } from "./PageHero";
+
+export function SpaPage({ locale }: { locale: Locale }) {
+  const c = t(locale);
+  const p = c.spaPage;
+  return (
+    <>
+      <PageHero kicker={p.kicker} title={p.h1} lead={p.lead} />
+
+      <section className="tp-scene tp-pools-scene tp-dark" data-scene="2" aria-labelledby="tp-pools-h">
+        <div className="tp-rays" aria-hidden="true" />
+        <div className="tp-wrap">
+          <h2 id="tp-pools-h" className="tp-h2 tp-h2-xl tp-reveal">
+            {p.poolsHeading}
+          </h2>
+          <PoolCards locale={locale} />
+          <p className="tp-scene-ph tp-reveal">
+            <Rich text={p.poolsRules} locale={locale} />
+          </p>
+        </div>
+      </section>
+
+      <section className="tp-scene tp-spa-scene tp-spa-rise tp-dark" data-scene="3" aria-labelledby="tp-spa-h">
+        <SpaWater />
+        <div className="tp-wrap tp-spa-grid">
+          <div className="tp-reveal">
+            <h2 id="tp-spa-h" className="tp-h2 tp-h2-xl">
+              {p.spaHeading}
+            </h2>
+            <FacilityList locale={locale} />
+            <p className="tp-scene-ph">
+              <Rich text={p.massage} locale={locale} />
+            </p>
+            <p className="tp-spa-extra">
+              <Rich text={p.gym} locale={locale} />
+            </p>
+          </div>
+          <div className="tp-reveal">
+            <h2 className="sr-only">{p.sessionsHeading}</h2>
+            <Sessions locale={locale} headingId="tp-spa-sessions" />
+          </div>
+        </div>
+      </section>
+
+      <section className="tp-section" aria-labelledby="tp-water-h">
+        <div className="tp-wrap tp-two-col">
+          <div className="tp-reveal">
+            <h2 id="tp-water-h" className="tp-h2">
+              {p.waterHeading}
+            </h2>
+            <p>
+              <Rich text={p.water} locale={locale} />
+            </p>
+          </div>
+          <div className="tp-reveal">
+            <h2 className="tp-h2">{p.walkHeading}</h2>
+            <p>
+              <Rich text={p.walk} locale={locale} />
+            </p>
+          </div>
+        </div>
+        <div className="tp-wrap">
+          <p className="tp-note tp-reveal">{p.note}</p>
+          <div className="tp-btn-row tp-reveal">
+            <a href={telLink} className="tp-btn tp-btn-copper">
+              <PhoneIcon />
+              <span>{c.common.call}</span>
+            </a>
+            <WhatsAppPending locale={locale} />
+          </div>
+        </div>
+      </section>
+
+      <ContactStrip locale={locale} />
+    </>
+  );
+}

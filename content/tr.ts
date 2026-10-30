@@ -43,7 +43,6 @@ export const tr = {
       liteOn: "Açık",
       liteOff: "Kapalı",
     },
-    scrollCue: "Aşağı in",
     more: "Devamı",
   },
 

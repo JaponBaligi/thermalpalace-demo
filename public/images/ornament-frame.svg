@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="300" viewBox="0 0 300 300">
+  <!-- Original matte-gold 9-slice frame for the maps: 100-unit corners, 100-unit repeating edge tiles. -->
+  <defs>
+    <g id="beads" fill="#a88b57">
+      <circle cx="10" cy="0" r="3"/><circle cx="30" cy="0" r="3"/><circle cx="50" cy="0" r="3"/><circle cx="70" cy="0" r="3"/><circle cx="90" cy="0" r="3"/>
+    </g>
+    <g id="edge" fill="none" stroke-linecap="round">
+      <use xlink:href="#beads" y="9"/>
+      <use xlink:href="#beads" y="91"/>
+      <path d="M0 19H100M0 81H100" stroke="#8f7445" stroke-width="1.6"/>
+      <g stroke="#a88b57" stroke-width="3.2">
+        <path d="M50 50C42 32 22 28 16 40C11 51 24 58 29 50C32 45 27 41 23 44"/>
+        <path d="M50 50C58 32 78 28 84 40C89 51 76 58 71 50C68 45 73 41 77 44"/>
+        <path d="M50 50C42 68 22 72 16 60C11 49 24 42 29 50C32 55 27 59 23 56"/>
+        <path d="M50 50C58 68 78 72 84 60C89 49 76 42 71 50C68 55 73 59 77 56"/>
+      </g>
+      <path d="M0 50H6M94 50H100" stroke="#8f7445" stroke-width="2.4"/>
+      <path d="M50 41L56 50L50 59L44 50Z" fill="#b89c68" stroke="none"/>
+      <circle cx="0" cy="50" r="3.4" fill="#b89c68" stroke="none"/>
+      <circle cx="100" cy="50" r="3.4" fill="#b89c68" stroke="none"/>
+    </g>
+    <g id="corner" fill="none" stroke-linecap="round">
+      <g fill="#a88b57"><circle cx="9" cy="9" r="3.4"/><circle cx="30" cy="9" r="3"/><circle cx="50" cy="9" r="3"/><circle cx="70" cy="9" r="3"/><circle cx="90" cy="9" r="3"/><circle cx="9" cy="30" r="3"/><circle cx="9" cy="50" r="3"/><circle cx="9" cy="70" r="3"/><circle cx="9" cy="90" r="3"/></g>
+      <path d="M19 100V19H100" stroke="#8f7445" stroke-width="1.6"/>
+      <path d="M81 100V81H100" stroke="#8f7445" stroke-width="1.6"/>
+      <g stroke="#a88b57" stroke-width="3.2">
+        <path d="M58 58C70 44 86 46 88 58C90 68 78 70 76 62C75 57 80 55 82 58"/>
+        <path d="M58 58C44 70 46 86 58 88C68 90 70 78 62 76C57 75 55 80 58 82"/>
+        <path d="M46 46C40 36 30 32 26 38"/>
+      </g>
+      <g transform="translate(46 46)">
+        <g fill="#a88b57">
+          <ellipse rx="4.6" ry="11" cy="-11"/><ellipse rx="4.6" ry="11" cy="-11" transform="rotate(45)"/><ellipse rx="4.6" ry="11" cy="-11" transform="rotate(90)"/><ellipse rx="4.6" ry="11" cy="-11" transform="rotate(135)"/>
+          <ellipse rx="4.6" ry="11" cy="-11" transform="rotate(180)"/><ellipse rx="4.6" ry="11" cy="-11" transform="rotate(225)"/><ellipse rx="4.6" ry="11" cy="-11" transform="rotate(270)"/><ellipse rx="4.6" ry="11" cy="-11" transform="rotate(315)"/>
+        </g>
+        <circle r="6.5" fill="#16191c"/><circle r="4" fill="#b89c68"/>
+      </g>
+    </g>
+  </defs>
+  <use xlink:href="#corner"/>
+  <use xlink:href="#corner" transform="translate(300 0) scale(-1 1)"/>
+  <use xlink:href="#corner" transform="translate(0 300) scale(1 -1)"/>
+  <use xlink:href="#corner" transform="translate(300 300) scale(-1 -1)"/>
+  <use xlink:href="#edge" x="100"/>
+  <use xlink:href="#edge" transform="translate(100 300) scale(1 -1)"/>
+  <use xlink:href="#edge" transform="translate(100 100) rotate(90)"/>
+  <use xlink:href="#edge" transform="translate(200 200) rotate(-90)"/>
+</svg>
