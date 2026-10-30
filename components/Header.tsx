@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState, type CSSProperties } from "re
 import { usePathname } from "next/navigation";
 import { routes, type Locale, type PageKey } from "@/content/routes";
 import type { SiteContent } from "@/content";
-import { pageFromPath } from "@/lib/path";
+import { navPage } from "@/lib/path";
 import { phoneText, telLink } from "@/lib/contact";
 import { pauseSmoothScroll, resumeSmoothScroll } from "@/lib/motion";
 import { site } from "@/content/site";
@@ -13,7 +13,7 @@ import { NewTab, PhoneIcon, PinIcon, Wordmark } from "./ui";
 
 export function Header({ locale, c }: { locale: Locale; c: SiteContent["common"] }) {
   const pathname = usePathname();
-  const current = pageFromPath(locale, pathname);
+  const current = navPage(locale, pathname);
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(false);

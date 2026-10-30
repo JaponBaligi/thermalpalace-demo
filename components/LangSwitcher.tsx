@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import type { MouseEvent } from "react";
 import { htmlLang, localeLabel, localeName, locales, routes, type Locale } from "@/content/routes";
-import { pageFromPath } from "@/lib/path";
+import { extraPage, pageFromPath } from "@/lib/path";
 
 export function LangSwitcher({
   locale,
@@ -18,6 +18,7 @@ export function LangSwitcher({
 }) {
   const pathname = usePathname();
   const page = pageFromPath(locale, pathname);
+  const extra = extraPage(pathname);
 
   function go(e: MouseEvent<HTMLAnchorElement>) {
     onNavigate?.();
@@ -33,7 +34,7 @@ export function LangSwitcher({
         {locales.map((l) => (
           <li key={l}>
             <a
-              href={routes[l][page]}
+              href={extra ? extra[l] : routes[l][page]}
               hrefLang={htmlLang[l]}
               lang={htmlLang[l]}
               onClick={go}

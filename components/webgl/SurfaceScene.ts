@@ -11,6 +11,7 @@ import {
   Vector2,
   Vector3,
   Vector4,
+  VideoTexture,
   WebGLRenderTarget,
   type IUniform,
   type WebGLRenderer,
@@ -124,6 +125,9 @@ export class SurfaceScene {
       uSunDir: { value: new Vector3(0.72, 0.17, -1).normalize() },
       uSteam: { value: this.steamRT.texture },
       uWaveAmp: { value: 1 },
+      uVideo: { value: null },
+      uVidScale: { value: new Vector2(1, 1) },
+      uVideoMix: { value: 0 },
     };
     if (this.rippleMode === "sim") {
       const opts = { type: HalfFloatType, minFilter: LinearFilter, magFilter: LinearFilter, depthBuffer: false };
@@ -273,6 +277,30 @@ export class SurfaceScene {
     this.water.material.uniforms.uRippleGain.value = this.params.rippleGain;
   }
 
+  private video: HTMLVideoElement | null = null;
+  private videoTex: VideoTexture | null = null;
+  private videoMix = 0;
+
+  /** Hero footage (HeroVideo) sampled as a texture once it plays; fades out as the camera descends to S1. */
+  private updateVideo(dt: number, descent: number) {
+    const w = this.water.material.uniforms;
+    this.video ??= document.querySelector<HTMLVideoElement>(".tp-hero-video video");
+    const v = this.video;
+    const live = !!v && !v.paused && v.readyState >= 2;
+    if (live && !this.videoTex) {
+      this.videoTex = new VideoTexture(v);
+      w.uVideo.value = this.videoTex;
+    }
+    const k = Math.min(1, dt / 0.9);
+    this.videoMix += ((live ? 1 : 0) - this.videoMix) * k;
+    w.uVideoMix.value = this.videoTex ? this.videoMix * (1 - Math.min(1, Math.max(0, (descent - 0.55) / 0.4))) : 0;
+    const va = 16 / 9;
+    (w.uVidScale.value as Vector2).set(this.aspect > va ? 1 : this.aspect / va, this.aspect > va ? va / this.aspect : 1);
+    const root = document.documentElement;
+    if (live) root.dataset.heroVideo = "live";
+    else delete root.dataset.heroVideo;
+  }
+
   render(f: Frame) {
     const descent = this.params.descentOverride >= 0 ? this.params.descentOverride : f.descent;
     const horizon = this.updateCamera(descent, f.time);
@@ -294,6 +322,7 @@ export class SurfaceScene {
     w.uTime.value = f.time;
     w.uAspect.value = this.aspect;
     w.uWaveAmp.value = this.params.waveAmp;
+    this.updateVideo(f.dt, descent);
 
     const r = this.renderer;
     r.setRenderTarget(this.steamRT);
@@ -319,6 +348,7 @@ export class SurfaceScene {
     this.geometry.dispose();
     this.steamRT.dispose();
     this.sceneRT?.dispose();
+    this.videoTex?.dispose();
     this.simA?.dispose();
     this.simB?.dispose();
   }

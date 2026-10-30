@@ -4,7 +4,7 @@ import { palette } from "./fullscreen";
 /**
  * S0/S1 scene pass: morning sky, the thermal water surface seen from a camera that tilts down as the page
  * descends, and the steam buffer on top. One ray per pixel against the plane y = 0 (no geometry).
- * Defines: WAVES (3–6 sine waves), RIPPLE_SIM | RIPPLE_ANALYTIC, FLOOR_LIGHT (1–2 layers), POST_GRAIN, OCTAVES (noise include).
+ * Defines: WAVES (3–6 sine waves), RIPPLE_SIM | RIPPLE_ANALYTIC, POST_GRAIN, OCTAVES (noise include).
  */
 export const waterFrag = /* glsl */ `
 precision highp float;
@@ -22,6 +22,9 @@ uniform vec3 uCamRight;
 uniform vec3 uSunDir;
 uniform sampler2D uSteam;
 uniform float uWaveAmp;
+uniform sampler2D uVideo;
+uniform vec2 uVidScale;
+uniform float uVideoMix;
 #ifdef RIPPLE_SIM
 uniform sampler2D uRipple;
 uniform vec3 uRippleRect;
@@ -70,6 +73,7 @@ void main() {
   vec2 ndc = vUv * 2.0 - 1.0;
   vec3 dir = normalize(uCamFwd + ndc.x * uAspect * uTanHalf * uCamRight + ndc.y * uTanHalf * uCamUp);
   vec3 col;
+  vec2 disp = vec2(0.0);
 
   if (dir.y >= -0.0005) {
     col = sky(dir);
@@ -104,6 +108,7 @@ void main() {
 #endif
 
     vec3 n = normalize(vec3(-g.x, 1.0, -g.y));
+    disp = n.xz;
     vec3 V = -dir;
     float ndv = max(dot(n, V), 0.0);
     // F0 above water's 0.02 so the sky still reads from above (art direction, not physics)
@@ -115,17 +120,6 @@ void main() {
     float steep = clamp(-dir.y, 0.0, 1.0);
     vec3 body = mix(WATER, DEEP, smoothstep(0.15, 0.85, steep));
     body *= 1.0 + dot(n.xz, vec2(-0.55, 0.8)) * 2.6;
-    // sunlight focused by the surface onto the pool floor, seen through the water
-    float floorFade = smoothstep(0.2, 0.7, steep) / (1.0 + fp * 30.0);
-    vec2 fl = P.xz * 2.3 + n.xz * 1.4;
-    float c1 = 1.0 - abs(snoise(vec3(fl, uTime * 0.11)));
-#if FLOOR_LIGHT > 1
-    float c2 = 1.0 - abs(snoise(vec3(fl * 1.7 + 3.1, -uTime * 0.09)));
-    float caustic = pow(c1, 7.0) * 0.6 + pow(c2, 9.0) * 0.45;
-#else
-    float caustic = pow(c1, 8.0) * 0.75;
-#endif
-    body += SAND * caustic * 0.32 * floorFade;
     col = mix(body, refl, F);
 
     // sun glints only where the waves still resolve; far, flat water would mirror the whole disc
@@ -138,6 +132,12 @@ void main() {
     col = mix(col, MIST, smoothstep(6.0, 60.0, dist) * 0.6);
   }
 
+  col = clamp(col, DEEP, CEIL);
+  // real footage under the procedural surface: the shader only refracts it (cursor ripples) and adds steam
+  if (uVideoMix > 0.0) {
+    vec2 vuv = (vUv - 0.5) * uVidScale + 0.5 + disp * 0.035;
+    col = mix(col, texture(uVideo, vuv).rgb, uVideoMix);
+  }
   vec4 steam = texture(uSteam, vUv);
   col = col * (1.0 - steam.a) + steam.rgb;
 
@@ -148,6 +148,6 @@ void main() {
 #else
   col += (hash12(gl_FragCoord.xy) - 0.5) / 255.0;
 #endif
-  fragColor = vec4(clamp(col, DEEP, CEIL), 1.0);
+  fragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
 }
 `;
