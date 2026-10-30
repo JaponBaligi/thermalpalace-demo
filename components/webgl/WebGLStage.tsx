@@ -58,7 +58,8 @@ export function WebGLStage() {
       setQuality("lite", hard ?? "edition");
       return;
     }
-    if (!document.querySelector('[data-scene="0"]')) {
+    // only the home hero hosts the WebGL scene; inner pages reuse data-scene="0" for their CSS hero and stay LITE
+    if (!document.querySelector('.tp-hero[data-scene="0"]')) {
       setQuality("lite", "no-webgl-scene");
       return;
     }

@@ -42,6 +42,6 @@ void main() {
   vec2 vc = c * vec2(uAspect, 1.0);
   col *= mix(0.955, 1.0, smoothstep(1.15, 0.35, length(vc)));
   col += (hash12(gl_FragCoord.xy + fract(uTime * 7.0) * 311.0) - 0.5) * uGrain;
-  fragColor = vec4(max(col, DEEP), 1.0);
+  fragColor = vec4(clamp(col, DEEP, CEIL), 1.0);
 }
 `;

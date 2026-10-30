@@ -153,10 +153,10 @@ export function WaterLine({ className = "" }: { className?: string }) {
 type Tone = "deep" | "open" | "small" | "steam";
 
 const plateTones: Record<Tone, [string, string, string]> = {
-  deep: ["#1b4d53", "#12393f", "#cfe3e1"],
-  open: ["#cfe3e1", "#5f9a9b", "#f6f1e8"],
-  small: ["#e7d5b8", "#8fb3ae", "#f6f1e8"],
-  steam: ["#2a3f42", "#12393f", "#d9b98c"],
+  deep: ["#2a3133", "#14171a", "#8c918c"],
+  open: ["#3a4143", "#2a3133", "#aeb2ab"],
+  small: ["#4a3a28", "#2a3133", "#aeb2ab"],
+  steam: ["#2a3133", "#14171a", "#c8873a"],
 };
 
 /**
@@ -227,9 +227,9 @@ export function Caustics({ className = "" }: { className?: string }) {
 export function Ridges({ className = "" }: { className?: string }) {
   return (
     <svg className={`tp-ridges ${className}`} viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-      <path d="M0 150 C 160 90 300 120 430 96 S 700 40 860 80 S 1160 60 1280 92 S 1400 110 1440 100 V260 H0Z" fill="#b98a5c" fillOpacity="0.55" />
-      <path d="M0 190 C 140 150 260 170 400 140 S 640 110 820 150 S 1080 120 1240 150 S 1380 170 1440 160 V260 H0Z" fill="#2b5a5a" fillOpacity="0.75" />
-      <path d="M0 228 C 180 200 340 220 520 200 S 860 180 1040 206 S 1320 210 1440 198 V260 H0Z" fill="#7f3e16" />
+      <path d="M0 150 C 160 90 300 120 430 96 S 700 40 860 80 S 1160 60 1280 92 S 1400 110 1440 100 V260 H0Z" fill="#3a3128" fillOpacity="0.55" />
+      <path d="M0 190 C 140 150 260 170 400 140 S 640 110 820 150 S 1080 120 1240 150 S 1380 170 1440 160 V260 H0Z" fill="#2a3133" fillOpacity="0.75" />
+      <path d="M0 228 C 180 200 340 220 520 200 S 860 180 1040 206 S 1320 210 1440 198 V260 H0Z" fill="#1c2023" />
     </svg>
   );
 }

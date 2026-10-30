@@ -7,25 +7,22 @@
  * Palette from 55 §3; text pairs are checked by scripts/contrast.mjs. `water`, `line` and `foam` are decorative only.
  */
 @theme {
-  --color-cream: #f6f1e8;
-  --color-paper: #fbf8f2;
-  --color-ink: #1e2a2e;
-  --color-muted: #536062;
-  --color-petrol: #12393f;
-  --color-petrol-deep: #0b2a2f;
-  --color-abyss: #082226;
-  --color-copper: #9a4e1f;
-  --color-copper-deep: #7f3e16;
-  --color-sand: #d9b98c;
-  --color-water: #cfe3e1;
-  --color-mist: #b4cdca;
-  --color-line: #e2d9c9;
-  --color-verify-bg: #f1dec9;
-  --color-verify-ink: #7f3e16;
-  --color-ph-bg: #e3ecea;
+  /* Art direction A "Taş ve Buhar": dark mineral ground, bone text, one sparse amber accent. */
+  --color-basalt: #14171a;
+  --color-basalt-deep: #0e1012;
+  --color-slate-soft: #1c2023;
+  --color-slate: #2a3133;
+  --color-quartz: #8c918c;
+  --color-quartz-light: #aeb2ab;
+  --color-bone: #e9e4da;
+  --color-amber: #c8873a;
+  --color-amber-deep: #9c6529;
+  --color-line: #30363a;
+  --color-verify-bg: #2e261c;
+  --color-verify-ink: #e0a862;
 
-  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  --font-sans: var(--font-manrope), system-ui, "Segoe UI", sans-serif;
+  --font-display: var(--font-general-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-inter), system-ui, "Segoe UI", sans-serif;
 }
 
 :root {
@@ -35,8 +32,8 @@
   --maxw: 80rem;
   --ease-io: cubic-bezier(0.45, 0, 0.55, 1);
   --ease-liquid: cubic-bezier(0.2, 0.7, 0.1, 1);
-  --map-pin: var(--color-copper);
-  color-scheme: light;
+  --map-pin: var(--color-amber);
+  color-scheme: dark;
 }
 
 @media (min-width: 64rem) {
@@ -49,7 +46,7 @@
 
 @layer base {
   html {
-    background: var(--color-cream);
+    background: var(--color-basalt);
     -webkit-text-size-adjust: 100%;
     scroll-padding-block-start: calc(var(--header-h) + env(safe-area-inset-top) + 1rem);
   }
@@ -59,8 +56,8 @@
     min-block-size: 100svh;
     padding-block-start: calc(var(--header-h) + env(safe-area-inset-top));
     padding-block-end: calc(var(--sticky-h) + env(safe-area-inset-bottom));
-    background: var(--color-cream);
-    color: var(--color-ink);
+    background: var(--color-basalt);
+    color: var(--color-bone);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
     line-height: 1.6;
@@ -83,19 +80,19 @@
   }
 
   ::selection {
-    background: var(--color-water);
-    color: var(--color-petrol);
+    background: var(--color-slate);
+    color: var(--color-bone);
   }
 
   :focus-visible {
-    outline: 3px solid var(--color-copper);
+    outline: 3px solid var(--color-amber);
     outline-offset: 3px;
   }
 
   .tp-dark :focus-visible,
   .tp-panel :focus-visible,
   .tp-sticky :focus-visible {
-    outline-color: var(--color-sand);
+    outline-color: var(--color-amber);
   }
 
   a {
@@ -198,8 +195,8 @@ html.lenis body {
     inset-inline-start: 0.75rem;
     z-index: 100;
     padding: 0.75rem 1.1rem;
-    background: var(--color-petrol);
-    color: var(--color-cream);
+    background: var(--color-slate);
+    color: var(--color-bone);
     font-weight: 600;
     border-radius: 0.5rem;
     translate: 0 -200%;
@@ -211,28 +208,30 @@ html.lenis body {
 
   .tp-display {
     font-family: var(--font-display);
-    font-weight: 500;
-    line-height: 0.92;
-    letter-spacing: -0.015em;
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .tp-h2 {
     font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(2.1rem, 1.4rem + 2.6vw, 3.4rem);
-    line-height: 1.04;
-    letter-spacing: -0.01em;
+    font-weight: 300;
+    font-size: clamp(1.9rem, 1.3rem + 2.4vw, 3.2rem);
+    line-height: 1.08;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     margin-block-end: 1.25rem;
   }
 
   .tp-h2-xl {
-    font-size: clamp(2.6rem, 1.5rem + 4.6vw, 5.5rem);
-    line-height: 0.98;
+    font-size: clamp(2.3rem, 1.4rem + 4vw, 4.75rem);
+    line-height: 1.02;
   }
 
   .tp-h3 {
     font-family: var(--font-display);
-    font-weight: 500;
+    font-weight: 400;
     font-size: clamp(1.55rem, 1.3rem + 0.7vw, 1.9rem);
     line-height: 1.1;
   }
@@ -241,15 +240,15 @@ html.lenis body {
     max-inline-size: 38rem;
     font-size: clamp(1.075rem, 1rem + 0.3vw, 1.2rem);
     line-height: 1.65;
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
   }
 
   .tp-dark {
-    color: var(--color-cream);
+    color: var(--color-bone);
   }
 
   .tp-dark .tp-lead {
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
   }
 
   .tp-kicker {
@@ -261,11 +260,11 @@ html.lenis body {
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-copper-deep);
+    color: var(--color-amber);
   }
 
   .tp-dark .tp-kicker {
-    color: var(--color-sand);
+    color: var(--color-amber);
   }
 
   .tp-kicker-depth {
@@ -290,13 +289,13 @@ html.lenis body {
     font-weight: 600;
     letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--color-copper-deep);
+    color: var(--color-amber);
   }
 
   .tp-note {
     margin-block: 1.5rem;
     font-size: 0.95rem;
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
   }
 
   .tp-section {
@@ -304,7 +303,7 @@ html.lenis body {
   }
 
   .tp-paper {
-    background: var(--color-paper);
+    background: var(--color-slate-soft);
   }
 
   .tp-two-col {
@@ -358,26 +357,26 @@ html.lenis body {
 
   .tp-dark .tp-verify {
     background: transparent;
-    color: var(--color-sand);
-    box-shadow: inset 0 0 0 1px rgb(217 185 140 / 0.6);
+    color: var(--color-amber);
+    box-shadow: inset 0 0 0 1px rgb(200 135 58 / 0.6);
   }
 
   .tp-ph {
     display: inline-block;
     padding: 0.45rem 0.8rem;
-    border: 1px dashed #7e9b98;
+    border: 1px dashed #5e635f;
     border-radius: 0.4rem;
-    background: var(--color-ph-bg);
-    color: var(--color-ink);
+    background: var(--color-slate);
+    color: var(--color-bone);
     font-family: var(--font-sans);
     font-size: 0.9rem;
     line-height: 1.45;
   }
 
   .tp-dark .tp-ph {
-    border-color: rgb(207 227 225 / 0.4);
-    background: rgb(207 227 225 / 0.08);
-    color: var(--color-cream);
+    border-color: rgb(233 228 218 / 0.4);
+    background: rgb(233 228 218 / 0.08);
+    color: var(--color-bone);
   }
 
   /* ---------- buttons and links ---------- */
@@ -423,56 +422,56 @@ html.lenis body {
   }
 
   .tp-btn-copper {
-    background: var(--color-copper);
-    color: #fff;
+    background: var(--color-amber);
+    color: var(--color-basalt);
   }
 
   .tp-btn-copper:hover {
-    background: var(--color-copper-deep);
+    background: #d89a52;
   }
 
   .tp-btn-petrol {
-    background: var(--color-petrol);
-    color: var(--color-cream);
+    background: var(--color-slate);
+    color: var(--color-bone);
   }
 
   .tp-btn-petrol:hover {
-    background: var(--color-petrol-deep);
+    background: var(--color-slate-soft);
   }
 
   .tp-btn-outline {
     border-color: currentColor;
-    color: var(--color-ink);
+    color: var(--color-bone);
   }
 
   .tp-btn-outline:hover {
-    background: var(--color-ink);
-    border-color: var(--color-ink);
-    color: var(--color-cream);
+    background: var(--color-slate);
+    border-color: var(--color-slate);
+    color: var(--color-bone);
   }
 
   .tp-btn-cream {
-    background: var(--color-cream);
-    color: var(--color-petrol);
+    background: var(--color-basalt);
+    color: var(--color-bone);
   }
 
   .tp-btn-cream:hover {
-    background: #fff;
+    background: var(--color-slate);
   }
 
   .tp-btn-ghost-light {
-    border-color: rgb(246 241 232 / 0.55);
-    color: var(--color-cream);
+    border-color: rgb(233 228 218 / 0.55);
+    color: var(--color-bone);
   }
 
   .tp-btn-ghost-light:hover {
-    border-color: var(--color-cream);
-    background: rgb(246 241 232 / 0.1);
+    border-color: var(--color-basalt);
+    background: rgb(233 228 218 / 0.1);
   }
 
   .tp-btn-pending {
-    border: 1px dashed #7e8a8c;
-    color: var(--color-muted);
+    border: 1px dashed #5e635f;
+    color: var(--color-quartz-light);
     cursor: default;
     text-align: start;
   }
@@ -492,8 +491,8 @@ html.lenis body {
   }
 
   .tp-btn-pending.tp-on-dark {
-    border-color: rgb(246 241 232 / 0.45);
-    color: var(--color-cream);
+    border-color: rgb(233 228 218 / 0.45);
+    color: var(--color-bone);
   }
 
   .tp-link {
@@ -502,7 +501,7 @@ html.lenis body {
     gap: 0.5rem;
     min-block-size: 2.75rem;
     font-weight: 600;
-    color: var(--color-copper-deep);
+    color: var(--color-amber);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.3em;
@@ -515,7 +514,7 @@ html.lenis body {
 
   .tp-link-light,
   .tp-dark .tp-link {
-    color: var(--color-sand);
+    color: var(--color-amber);
   }
 
   /* ---------- wordmark ---------- */
@@ -534,10 +533,10 @@ html.lenis body {
 
   .tp-mark-name {
     font-family: var(--font-display);
-    font-weight: 500;
+    font-weight: 400;
     font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
     letter-spacing: 0.01em;
-    color: var(--color-petrol);
+    color: var(--color-bone);
   }
 
   .tp-mark-line {
@@ -546,17 +545,17 @@ html.lenis body {
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
   }
 
   .tp-mark-light .tp-mark-name,
   .tp-panel .tp-mark-name {
-    color: var(--color-cream);
+    color: var(--color-bone);
   }
 
   .tp-mark-light .tp-mark-line,
   .tp-panel .tp-mark-line {
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
   }
 
   /* ---------- header (behaviour per .cursor/rules/header-navbar.mdc) ---------- */
@@ -580,10 +579,10 @@ html.lenis body {
   }
 
   .tp-header[data-solid="true"] {
-    background: rgb(246 241 232 / 0.95);
+    background: rgb(233 228 218 / 0.95);
     box-shadow:
-      0 1px 0 rgb(18 57 63 / 0.08),
-      0 10px 30px -18px rgb(11 42 47 / 0.35);
+      0 1px 0 rgb(233 228 218 / 0.08),
+      0 10px 30px -18px rgb(0 0 0 / 0.35);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
@@ -614,7 +613,7 @@ html.lenis body {
     font-size: 0.94rem;
     font-weight: 600;
     text-decoration: none;
-    color: var(--color-ink);
+    color: var(--color-bone);
   }
 
   .tp-nav a::after {
@@ -623,7 +622,7 @@ html.lenis body {
     inset-inline: 0.85rem;
     inset-block-end: 0.55rem;
     block-size: 1px;
-    background: var(--color-copper);
+    background: var(--color-amber);
     scale: 0 1;
     transform-origin: left;
     transition: scale 500ms var(--ease-liquid);
@@ -649,7 +648,7 @@ html.lenis body {
     font-weight: 600;
     font-variant-numeric: tabular-nums;
     text-decoration: none;
-    color: var(--color-petrol);
+    color: var(--color-bone);
   }
 
   .tp-header-cta {
@@ -669,14 +668,14 @@ html.lenis body {
     font-weight: 600;
     letter-spacing: 0.08em;
     text-decoration: none;
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
     border-radius: 999px;
   }
 
   .tp-lang a[aria-current="true"] {
-    color: var(--color-petrol);
+    color: var(--color-bone);
     text-decoration: underline;
-    text-decoration-color: var(--color-copper);
+    text-decoration-color: var(--color-amber);
     text-underline-offset: 0.35em;
   }
 
@@ -692,7 +691,7 @@ html.lenis body {
     margin-inline-end: -0.5rem;
     border: 0;
     background: none;
-    color: var(--color-petrol);
+    color: var(--color-bone);
     cursor: pointer;
   }
 
@@ -745,8 +744,8 @@ html.lenis body {
     inset: 0;
     z-index: 60;
     overflow-y: auto;
-    background: var(--color-petrol);
-    color: var(--color-cream);
+    background: var(--color-slate);
+    color: var(--color-bone);
     clip-path: inset(0 0 100% 0);
     visibility: hidden;
     transition:
@@ -781,10 +780,10 @@ html.lenis body {
     inline-size: 2.75rem;
     block-size: 2.75rem;
     margin-inline-end: -0.5rem;
-    border: 1px solid rgb(246 241 232 / 0.35);
+    border: 1px solid rgb(233 228 218 / 0.35);
     border-radius: 999px;
     background: none;
-    color: var(--color-cream);
+    color: var(--color-bone);
     cursor: pointer;
   }
 
@@ -804,7 +803,7 @@ html.lenis body {
   }
 
   .tp-panel-nav a[aria-current="page"] {
-    color: var(--color-sand);
+    color: var(--color-amber);
   }
 
   .tp-panel-nav li {
@@ -822,12 +821,12 @@ html.lenis body {
   }
 
   .tp-lang-panel a {
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
   }
 
   .tp-lang-panel a[aria-current="true"] {
-    color: var(--color-cream);
-    text-decoration-color: var(--color-sand);
+    color: var(--color-bone);
+    text-decoration-color: var(--color-amber);
   }
 
   .tp-panel-contact {
@@ -847,8 +846,8 @@ html.lenis body {
     grid-template-columns: repeat(3, 1fr);
     min-block-size: var(--sticky-h);
     padding-block-end: env(safe-area-inset-bottom);
-    background: var(--color-petrol-deep);
-    color: var(--color-cream);
+    background: var(--color-slate-soft);
+    color: var(--color-bone);
     box-shadow: 0 -10px 30px -20px rgb(0 0 0 / 0.5);
   }
 
@@ -865,13 +864,13 @@ html.lenis body {
   }
 
   .tp-sticky-call {
-    background: var(--color-copper);
+    background: var(--color-amber);
     color: #fff;
   }
 
   .tp-sticky-pending {
-    color: var(--color-mist);
-    border-inline: 1px solid rgb(246 241 232 / 0.12);
+    color: var(--color-quartz-light);
+    border-inline: 1px solid rgb(233 228 218 / 0.12);
   }
 
   .tp-sticky-note {
@@ -900,7 +899,7 @@ html.lenis body {
 
   .tp-page-hero,
   .tp-hero::before {
-    background: linear-gradient(180deg, var(--color-cream) 0%, #f1efe7 50%, #e2ece8 82%, var(--color-water) 100%);
+    background: linear-gradient(180deg, var(--color-basalt) 0%, #16191c 50%, #1a1e21 82%, var(--color-slate) 100%);
   }
 
   /* LITE backgrounds of S0/S1 sit in fading layers; with WebGL on they reveal the canvas behind the page */
@@ -941,22 +940,12 @@ html.lenis body {
 
   .tp-hero-title {
     display: grid;
-    font-size: clamp(4rem, 15.5vw, 12.5rem);
-    color: var(--color-petrol);
+    font-size: clamp(2.75rem, 10.5vw, 9rem);
+    color: var(--color-bone);
   }
 
   .tp-hero-title > span {
     display: block;
-  }
-
-  .tp-hero-l2 {
-    padding-inline-start: 0.42em;
-    font-style: italic;
-    color: var(--color-copper-deep);
-  }
-
-  .tp-hero-l3 {
-    padding-inline-start: 0.12em;
   }
 
   .tp-hero-side {
@@ -965,15 +954,14 @@ html.lenis body {
 
   .tp-tagline {
     font-family: var(--font-display);
-    font-style: italic;
     font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.4rem);
     line-height: 1.1;
-    color: var(--color-petrol);
+    color: var(--color-bone);
   }
 
   .tp-hero-sub {
     margin-block-start: 1rem;
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
   }
 
   .tp-hero-side .tp-btn-row {
@@ -985,11 +973,11 @@ html.lenis body {
     flex-wrap: wrap;
     gap: 0.5rem 1.6rem;
     padding-block-start: 1.25rem;
-    border-block-start: 1px solid rgb(18 57 63 / 0.18);
+    border-block-start: 1px solid rgb(233 228 218 / 0.18);
     font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: 0.06em;
-    color: var(--color-petrol);
+    color: var(--color-bone);
   }
 
   .tp-hero-facts li {
@@ -1003,7 +991,7 @@ html.lenis body {
     block-size: 4px;
     margin-inline-end: 0.7rem;
     border-radius: 50%;
-    background: var(--color-copper);
+    background: var(--color-amber);
   }
 
   .tp-scroll-cue {
@@ -1049,13 +1037,13 @@ html.lenis body {
       text-transform: uppercase;
       text-decoration: none;
       writing-mode: vertical-rl;
-      color: var(--color-petrol);
+      color: var(--color-bone);
     }
 
     .tp-scroll-line {
       inline-size: 1px;
       block-size: 4.5rem;
-      background: linear-gradient(var(--color-petrol), transparent);
+      background: linear-gradient(var(--color-slate), transparent);
       transform-origin: top;
       animation: tp-cue 2.8s var(--ease-liquid) infinite;
     }
@@ -1081,7 +1069,7 @@ html.lenis body {
     block-size: 75vmax;
     inset-inline-start: -25vmax;
     inset-block-start: -35vmax;
-    background: radial-gradient(closest-side, rgb(255 255 255 / 0.95), rgb(255 255 255 / 0));
+    background: radial-gradient(closest-side, rgb(233 228 218 / 0.07), rgb(233 228 218 / 0));
     animation: tp-drift-a 34s ease-in-out infinite alternate;
   }
 
@@ -1090,7 +1078,7 @@ html.lenis body {
     block-size: 60vmax;
     inset-inline-end: -22vmax;
     inset-block-start: 5vmax;
-    background: radial-gradient(closest-side, rgb(207 227 225 / 0.85), rgb(207 227 225 / 0));
+    background: radial-gradient(closest-side, rgb(140 145 140 / 0.08), rgb(140 145 140 / 0));
     animation: tp-drift-b 42s ease-in-out infinite alternate;
   }
 
@@ -1099,7 +1087,7 @@ html.lenis body {
     block-size: 55vmax;
     inset-inline-start: 25%;
     inset-block-end: -38vmax;
-    background: radial-gradient(closest-side, rgb(217 185 140 / 0.3), rgb(217 185 140 / 0));
+    background: radial-gradient(closest-side, rgb(200 135 58 / 0.1), rgb(200 135 58 / 0));
     animation: tp-drift-c 38s ease-in-out infinite alternate;
   }
 
@@ -1112,7 +1100,7 @@ html.lenis body {
     inset-inline: 0;
     inset-block-end: 0;
     block-size: 2.5rem;
-    color: var(--color-petrol);
+    color: var(--color-bone);
     opacity: 0.35;
   }
 
@@ -1138,7 +1126,7 @@ html.lenis body {
 
   .tp-page-title {
     font-size: clamp(3.2rem, 1.6rem + 7vw, 8rem);
-    color: var(--color-petrol);
+    color: var(--color-bone);
   }
 
   .tp-page-lead {
@@ -1152,7 +1140,7 @@ html.lenis body {
   }
 
   .tp-surface::before {
-    background: linear-gradient(180deg, var(--color-water) 0%, #c8dedb 100%);
+    background: linear-gradient(180deg, var(--color-slate) 0%, #1e2326 100%);
   }
 
   .tp-surface-grid {
@@ -1168,10 +1156,10 @@ html.lenis body {
   .tp-float {
     padding: 1.5rem;
     border-radius: 1rem;
-    background: var(--color-paper);
+    background: var(--color-slate-soft);
     box-shadow:
       0 1px 0 rgb(255 255 255 / 0.8) inset,
-      0 22px 40px -28px rgb(11 42 47 / 0.45);
+      0 22px 40px -28px rgb(0 0 0 / 0.45);
   }
 
   .tp-float-label {
@@ -1180,7 +1168,7 @@ html.lenis body {
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
   }
 
   .tp-float-value {
@@ -1198,17 +1186,17 @@ html.lenis body {
     line-height: 1;
     font-variant-numeric: lining-nums;
     text-decoration: none;
-    color: var(--color-petrol);
+    color: var(--color-bone);
   }
 
   .tp-float-phone:hover {
-    color: var(--color-copper-deep);
+    color: var(--color-amber);
   }
 
   .tp-float-note {
     margin-block-start: 0.5rem;
     font-size: 0.92rem;
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
   }
 
   .tp-float-ph {
@@ -1223,7 +1211,7 @@ html.lenis body {
 
   .tp-chips li {
     padding: 0.45rem 0.95rem;
-    border: 1px solid rgb(18 57 63 / 0.18);
+    border: 1px solid rgb(233 228 218 / 0.18);
     border-radius: 999px;
     font-size: 0.92rem;
     font-weight: 500;
@@ -1260,13 +1248,13 @@ html.lenis body {
 
   .tp-pools-scene {
     /* eased descent from the surface colour, so the edge to S1 has no visible kink */
-    background: linear-gradient(180deg, #c8dedb 0, #bcd5d2 2rem, #9dbdbb 4.5rem, #6a9395 7rem, #34636a 9.5rem, var(--color-petrol) 12rem, var(--color-petrol) 70%, var(--color-petrol-deep) 100%);
+    background: linear-gradient(180deg, #1e2326 0, #20262a 2rem, #232a2d 4.5rem, #262d30 7rem, #283033 9.5rem, var(--color-slate) 12rem, var(--color-slate) 70%, var(--color-slate-soft) 100%);
     padding-block-start: clamp(10rem, 18vw, 14rem);
   }
 
   /* with WebGL the canvas water continues under the top of S2 and sinks into petrol */
   html[data-gl="on"] .tp-pools-scene {
-    background: linear-gradient(180deg, rgb(18 57 63 / 0) 0, rgb(18 57 63 / 0.22) 2.5rem, rgb(18 57 63 / 0.55) 5rem, rgb(18 57 63 / 0.84) 8rem, var(--color-petrol) 11rem, var(--color-petrol) 70%, var(--color-petrol-deep) 100%);
+    background: linear-gradient(180deg, rgb(233 228 218 / 0) 0, rgb(233 228 218 / 0.22) 2.5rem, rgb(233 228 218 / 0.55) 5rem, rgb(233 228 218 / 0.84) 8rem, var(--color-slate) 11rem, var(--color-slate) 70%, var(--color-slate-soft) 100%);
   }
 
   .tp-rays {
@@ -1276,7 +1264,7 @@ html.lenis body {
     z-index: -1;
     inline-size: 140%;
     block-size: 75%;
-    background: repeating-linear-gradient(105deg, rgb(207 227 225 / 0) 0 90px, rgb(207 227 225 / 0.05) 90px 150px, rgb(207 227 225 / 0) 150px 280px);
+    background: repeating-linear-gradient(105deg, rgb(233 228 218 / 0) 0 90px, rgb(233 228 218 / 0.05) 90px 150px, rgb(233 228 218 / 0) 150px 280px);
     mask-image: linear-gradient(180deg, transparent 0%, #000 18%, transparent 90%);
     pointer-events: none;
     animation: tp-rays 26s ease-in-out infinite alternate;
@@ -1291,16 +1279,16 @@ html.lenis body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: 1px solid rgb(207 227 225 / 0.16);
+    border: 1px solid rgb(233 228 218 / 0.16);
     border-radius: 1rem;
-    background: rgb(246 241 232 / 0.035);
+    background: rgb(233 228 218 / 0.035);
     transition:
       border-color 600ms var(--ease-liquid),
       translate 700ms var(--ease-liquid);
   }
 
   .tp-pool:hover {
-    border-color: rgb(217 185 140 / 0.5);
+    border-color: rgb(200 135 58 / 0.5);
     translate: 0 -4px;
   }
 
@@ -1332,11 +1320,11 @@ html.lenis body {
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-sand);
+    color: var(--color-amber);
   }
 
   .tp-pool-line {
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
     font-size: 0.98rem;
   }
 
@@ -1359,11 +1347,11 @@ html.lenis body {
   /* ---------- S3 spa, light through water ---------- */
 
   .tp-spa-scene:not(.tp-spa-rise) {
-    background: linear-gradient(180deg, var(--color-petrol-deep) 0%, var(--color-abyss) 55%, #0d3035 100%);
+    background: linear-gradient(180deg, var(--color-slate-soft) 0%, var(--color-basalt-deep) 55%, #101315 100%);
   }
 
   .tp-spa-rise {
-    background: linear-gradient(180deg, var(--color-petrol-deep) 0%, var(--color-abyss) 45%, #0d3035 calc(100% - 13rem), #6f9592 calc(100% - 6rem), var(--color-cream) 100%);
+    background: linear-gradient(180deg, var(--color-slate-soft) 0%, var(--color-basalt-deep) 45%, #101315 calc(100% - 13rem), #14171a calc(100% - 6rem), var(--color-basalt) 100%);
     padding-block-end: clamp(13rem, 20vw, 16rem);
   }
 
@@ -1373,7 +1361,7 @@ html.lenis body {
     z-index: -1;
     inline-size: 124%;
     block-size: 124%;
-    color: var(--color-sand);
+    color: var(--color-amber);
     opacity: 0.08;
     mask-image: radial-gradient(80% 70% at 30% 35%, #000 30%, transparent 85%);
     pointer-events: none;
@@ -1395,7 +1383,7 @@ html.lenis body {
 
   .tp-facilities {
     margin-block-start: 2.5rem;
-    border-block-start: 1px solid rgb(207 227 225 / 0.18);
+    border-block-start: 1px solid rgb(233 228 218 / 0.18);
   }
 
   .tp-facility {
@@ -1403,7 +1391,7 @@ html.lenis body {
     grid-template-columns: 2.75rem 1fr;
     column-gap: 1rem;
     padding-block: 1.1rem;
-    border-block-end: 1px solid rgb(207 227 225 / 0.18);
+    border-block-end: 1px solid rgb(233 228 218 / 0.18);
   }
 
   .tp-facility-index {
@@ -1412,33 +1400,33 @@ html.lenis body {
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.1em;
-    color: var(--color-sand);
+    color: var(--color-amber);
     font-variant-numeric: tabular-nums;
   }
 
   .tp-facility-name {
     font-family: var(--font-display);
-    font-weight: 500;
+    font-weight: 400;
     font-size: clamp(1.45rem, 1.2rem + 0.8vw, 1.85rem);
     line-height: 1.15;
   }
 
   .tp-facility-line {
     margin-block-start: 0.25rem;
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
     font-size: 0.96rem;
   }
 
   .tp-spa-extra {
     margin-block-start: 1.5rem;
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
   }
 
   .tp-sessions {
     padding: clamp(1.75rem, 4vw, 2.75rem);
-    border: 1px solid rgb(217 185 140 / 0.45);
+    border: 1px solid rgb(200 135 58 / 0.45);
     border-radius: 1.25rem;
-    background: linear-gradient(160deg, rgb(217 185 140 / 0.1), rgb(217 185 140 / 0) 60%);
+    background: linear-gradient(160deg, rgb(200 135 58 / 0.1), rgb(200 135 58 / 0) 60%);
   }
 
   .tp-sessions-h {
@@ -1446,7 +1434,7 @@ html.lenis body {
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-sand);
+    color: var(--color-amber);
     line-height: 1.8;
   }
 
@@ -1460,8 +1448,7 @@ html.lenis body {
 
   .tp-sessions-kinds > span:nth-child(2) {
     padding-inline-start: 0.5em;
-    font-style: italic;
-    color: var(--color-sand);
+    color: var(--color-amber);
   }
 
   .tp-sessions-kinds > span:nth-child(3) {
@@ -1473,19 +1460,19 @@ html.lenis body {
   }
 
   .tp-sessions-text {
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
     margin-block-end: 1.5rem;
   }
 
   /* ---------- S4 rooms, still water ---------- */
 
   .tp-rooms-scene {
-    background: linear-gradient(180deg, #0d3035 0, #6f9592 5rem, #d6e4e0 11rem, var(--color-cream) 18rem, var(--color-paper) 100%);
+    background: linear-gradient(180deg, #101315 0, #14171a 5rem, #181b1e 11rem, var(--color-basalt) 18rem, var(--color-slate-soft) 100%);
     padding-block: clamp(12rem, 20vw, 16rem) clamp(3rem, 6vw, 5rem);
   }
 
   .tp-rooms-plain {
-    background: linear-gradient(180deg, var(--color-water) 0, var(--color-cream) 10rem, var(--color-paper) 100%);
+    background: linear-gradient(180deg, var(--color-slate) 0, var(--color-basalt) 10rem, var(--color-slate-soft) 100%);
     padding-block: clamp(4rem, 8vw, 6rem) 1rem;
   }
 
@@ -1495,7 +1482,7 @@ html.lenis body {
     inset-block-start: 10rem;
     z-index: -1;
     block-size: 7rem;
-    background: repeating-linear-gradient(180deg, rgb(18 57 63 / 0.07) 0 1px, transparent 1px 14px);
+    background: repeating-linear-gradient(180deg, rgb(233 228 218 / 0.07) 0 1px, transparent 1px 14px);
     mask-image: linear-gradient(180deg, transparent, #000 40%, transparent);
     pointer-events: none;
   }
@@ -1517,7 +1504,7 @@ html.lenis body {
     overflow: hidden;
     border: 1px solid var(--color-line);
     border-radius: 1rem;
-    background: var(--color-paper);
+    background: var(--color-slate-soft);
     scroll-margin-block-start: calc(var(--header-h) + 1rem);
     transition:
       box-shadow 600ms var(--ease-liquid),
@@ -1526,15 +1513,15 @@ html.lenis body {
 
   .tp-unit:hover {
     translate: 0 -4px;
-    box-shadow: 0 30px 50px -36px rgb(11 42 47 / 0.55);
+    box-shadow: 0 30px 50px -36px rgb(0 0 0 / 0.55);
   }
 
   .tp-unit-art {
     display: grid;
     place-items: center;
     padding: 1.75rem 1.5rem 1.25rem;
-    background: linear-gradient(180deg, #e4eeeb, var(--color-water));
-    color: var(--color-petrol);
+    background: linear-gradient(180deg, #1e2326, var(--color-slate));
+    color: var(--color-bone);
   }
 
   .tp-glyph {
@@ -1543,11 +1530,11 @@ html.lenis body {
   }
 
   .tp-glyph-dot {
-    fill: var(--color-copper);
+    fill: var(--color-amber);
   }
 
   .tp-glyph-water {
-    stroke: var(--color-copper);
+    stroke: var(--color-amber);
     opacity: 0.6;
   }
 
@@ -1584,19 +1571,19 @@ html.lenis body {
     gap: 0.75rem;
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
   }
 
   .tp-unit-code {
     padding: 0.15rem 0.6rem;
-    border: 1px solid rgb(18 57 63 / 0.3);
+    border: 1px solid rgb(233 228 218 / 0.3);
     border-radius: 999px;
-    color: var(--color-petrol);
+    color: var(--color-bone);
     font-variant-numeric: tabular-nums;
   }
 
   .tp-unit-line {
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
   }
 
   .tp-unit-tags {
@@ -1608,7 +1595,7 @@ html.lenis body {
   .tp-unit-tags li {
     padding: 0.25rem 0.7rem;
     border-radius: 999px;
-    background: #ece5d8;
+    background: #2a3133;
     font-size: 0.82rem;
     font-weight: 500;
   }
@@ -1650,7 +1637,7 @@ html.lenis body {
     flex: none;
     inline-size: 1.4rem;
     block-size: 0.5rem;
-    background: radial-gradient(circle at 50% 50%, var(--color-copper) 0 2px, transparent 2.5px), linear-gradient(var(--color-copper), var(--color-copper)) center / 100% 1px no-repeat;
+    background: radial-gradient(circle at 50% 50%, var(--color-amber) 0 2px, transparent 2.5px), linear-gradient(var(--color-amber), var(--color-amber)) center / 100% 1px no-repeat;
     opacity: 0.85;
   }
 
@@ -1679,7 +1666,7 @@ html.lenis body {
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
   }
 
   .tp-table tbody th {
@@ -1688,16 +1675,16 @@ html.lenis body {
 
   .tp-table-code {
     font-weight: 500;
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
   }
 
   .tp-dark .tp-table th,
   .tp-dark .tp-table td {
-    border-color: rgb(207 227 225 / 0.18);
+    border-color: rgb(233 228 218 / 0.18);
   }
 
   .tp-dark .tp-table thead th {
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
   }
 
   @media (max-width: 39.99rem) {
@@ -1731,7 +1718,7 @@ html.lenis body {
 
     .tp-table-units td::before {
       content: attr(data-label);
-      color: var(--color-muted);
+      color: var(--color-quartz-light);
     }
 
     .tp-table-units td {
@@ -1742,16 +1729,16 @@ html.lenis body {
   /* ---------- S5 dusk ---------- */
 
   .tp-dusk {
-    background: linear-gradient(180deg, var(--color-paper) 0%, #f0e3cb 40%, #e6cda6 72%, var(--color-sand) 100%);
+    background: linear-gradient(180deg, var(--color-slate-soft) 0%, #1c1f21 40%, #24231f 72%, var(--color-amber) 100%);
     padding-block-end: clamp(11rem, 18vw, 15rem);
   }
 
   .tp-dusk .tp-lead {
-    color: var(--color-ink);
+    color: var(--color-bone);
   }
 
   .tp-dusk .tp-kicker {
-    color: var(--color-copper-deep);
+    color: var(--color-amber);
   }
 
   .tp-dusk-grid {
@@ -1775,7 +1762,7 @@ html.lenis body {
 
   .tp-dusk-facts li {
     padding-inline-start: 1.5rem;
-    background: linear-gradient(var(--color-copper), var(--color-copper)) 0 0.8em / 0.8rem 1px no-repeat;
+    background: linear-gradient(var(--color-amber), var(--color-amber)) 0 0.8em / 0.8rem 1px no-repeat;
   }
 
   .tp-ridges {
@@ -1792,8 +1779,8 @@ html.lenis body {
     overflow: hidden;
     aspect-ratio: 3 / 2;
     border-radius: 1.25rem;
-    background: #e8e2d5;
-    box-shadow: 0 40px 60px -40px rgb(11 42 47 / 0.6);
+    background: #1e2326;
+    box-shadow: 0 40px 60px -40px rgb(0 0 0 / 0.6);
   }
 
   .tp-map img {
@@ -1820,14 +1807,14 @@ html.lenis body {
 
   .tp-copper {
     background:
-      linear-gradient(180deg, var(--color-copper-deep) 0, rgb(127 62 22 / 0) 9rem),
-      radial-gradient(120% 90% at 50% 110%, #b8662f 0%, var(--color-copper) 45%, var(--color-copper-deep) 100%);
+      radial-gradient(90% 70% at 50% 115%, rgb(200 135 58 / 0.22) 0%, rgb(200 135 58 / 0) 70%),
+      var(--color-basalt-deep);
     text-align: center;
   }
 
   .tp-copper .tp-kicker {
     justify-content: center;
-    color: var(--color-cream);
+    color: var(--color-bone);
   }
 
   .tp-halo {
@@ -1838,7 +1825,7 @@ html.lenis body {
     inline-size: min(70rem, 140vw);
     aspect-ratio: 1;
     border-radius: 50%;
-    background: radial-gradient(closest-side, rgb(246 220 180 / 0.28), rgb(246 220 180 / 0.08) 55%, transparent);
+    background: radial-gradient(closest-side, rgb(200 135 58 / 0.12), rgb(200 135 58 / 0.03) 55%, transparent);
     translate: -50% -50%;
     pointer-events: none;
     animation: tp-breathe 9s ease-in-out infinite;
@@ -1851,7 +1838,7 @@ html.lenis body {
 
   .tp-copper-title {
     font-size: clamp(5rem, 3rem + 12vw, 13rem);
-    color: var(--color-cream);
+    color: var(--color-bone);
   }
 
   .tp-copper-title-sm {
@@ -1869,13 +1856,13 @@ html.lenis body {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
-    color: var(--color-cream);
+    color: var(--color-bone);
   }
 
   .tp-copper-text {
     max-inline-size: 32rem;
     margin-block-start: 0.75rem;
-    color: var(--color-cream);
+    color: var(--color-bone);
   }
 
   /* ---------- contact strip ---------- */
@@ -1883,7 +1870,7 @@ html.lenis body {
   .tp-strip {
     position: relative;
     padding-block: clamp(4rem, 8vw, 6rem);
-    background: var(--color-petrol);
+    background: var(--color-slate);
   }
 
   .tp-strip-line {
@@ -1891,7 +1878,7 @@ html.lenis body {
     inset-inline: 0;
     inset-block-start: -1.25rem;
     block-size: 2.5rem;
-    color: var(--color-petrol);
+    color: var(--color-bone);
   }
 
   .tp-strip-line path {
@@ -1911,7 +1898,7 @@ html.lenis body {
   }
 
   .tp-strip-text {
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
   }
 
   .tp-strip-address {
@@ -1928,11 +1915,11 @@ html.lenis body {
     line-height: 1;
     font-variant-numeric: lining-nums;
     text-decoration: none;
-    color: var(--color-cream);
+    color: var(--color-bone);
   }
 
   .tp-strip-phone:hover {
-    color: var(--color-sand);
+    color: var(--color-amber);
   }
 
   .tp-strip-actions .tp-btn-row {
@@ -1978,7 +1965,7 @@ html.lenis body {
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--color-quartz-light);
   }
 
   .tp-dl dd {
@@ -1998,7 +1985,7 @@ html.lenis body {
     line-height: 1;
     font-variant-numeric: lining-nums;
     text-decoration: none;
-    color: var(--color-petrol);
+    color: var(--color-bone);
   }
 
   .tp-getting {
@@ -2008,14 +1995,14 @@ html.lenis body {
 
   .tp-getting li {
     padding-inline-start: 1.5rem;
-    background: linear-gradient(var(--color-copper), var(--color-copper)) 0 0.8em / 0.8rem 1px no-repeat;
+    background: linear-gradient(var(--color-amber), var(--color-amber)) 0 0.8em / 0.8rem 1px no-repeat;
   }
 
   /* ---------- footer ---------- */
 
   .tp-footer {
     padding-block: clamp(3.5rem, 7vw, 5rem) 2rem;
-    background: var(--color-petrol-deep);
+    background: var(--color-slate-soft);
   }
 
   .tp-footer-grid {
@@ -2035,13 +2022,13 @@ html.lenis body {
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-sand);
+    color: var(--color-amber);
   }
 
   .tp-footer-address {
     display: grid;
     margin-block-end: 0.5rem;
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
   }
 
   .tp-footer-link {
@@ -2049,7 +2036,7 @@ html.lenis body {
     align-items: center;
     min-block-size: 2.75rem;
     text-decoration: none;
-    color: var(--color-cream);
+    color: var(--color-bone);
   }
 
   .tp-footer-link:hover {
@@ -2063,7 +2050,7 @@ html.lenis body {
     margin-block-start: 3rem;
     padding-block-start: 1.75rem;
     font-size: 0.86rem;
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
   }
 
   .tp-footer-base::before {
@@ -2072,7 +2059,7 @@ html.lenis body {
     inset-inline: var(--gutter);
     inset-block-start: 0;
     block-size: 1px;
-    background: rgb(207 227 225 / 0.14);
+    background: rgb(233 228 218 / 0.14);
   }
 
   @media (min-width: 64rem) {
@@ -2087,7 +2074,7 @@ html.lenis body {
   }
 
   .tp-footer-demo {
-    color: var(--color-sand);
+    color: var(--color-amber);
   }
 
   .tp-lite-toggle {
@@ -2099,23 +2086,23 @@ html.lenis body {
     padding: 0;
     border: 0;
     background: none;
-    color: var(--color-mist);
+    color: var(--color-quartz-light);
     font: inherit;
     cursor: pointer;
   }
 
   .tp-lite-state {
     padding: 0.15rem 0.65rem;
-    border: 1px solid rgb(207 227 225 / 0.4);
+    border: 1px solid rgb(233 228 218 / 0.4);
     border-radius: 999px;
     font-size: 0.78rem;
     font-weight: 600;
-    color: var(--color-cream);
+    color: var(--color-bone);
   }
 
   .tp-lite-toggle[aria-pressed="true"] .tp-lite-state {
-    border-color: var(--color-sand);
-    color: var(--color-sand);
+    border-color: var(--color-amber);
+    color: var(--color-amber);
   }
 
   /* ---------- 404 ---------- */
@@ -2127,7 +2114,7 @@ html.lenis body {
   .tp-404-line {
     block-size: 1.5rem;
     margin-block: 2rem;
-    color: var(--color-petrol);
+    color: var(--color-bone);
     opacity: 0.4;
   }
 
@@ -2135,13 +2122,12 @@ html.lenis body {
     display: grid;
     gap: 0.75rem;
     font-size: clamp(3rem, 2rem + 6vw, 6.5rem);
-    color: var(--color-petrol);
+    color: var(--color-bone);
   }
 
   .tp-404-en {
-    font-style: italic;
     font-size: 0.55em;
-    color: var(--color-copper-deep);
+    color: var(--color-amber);
   }
 
   .tp-404-links {
@@ -2169,7 +2155,7 @@ html.intro-on .tp-intro {
   z-index: 90;
   display: grid;
   place-items: center;
-  background: radial-gradient(90% 70% at 50% 60%, #174a51 0%, var(--color-petrol) 55%, var(--color-petrol-deep) 100%);
+  background: radial-gradient(90% 70% at 50% 60%, #2a3133 0%, var(--color-slate) 55%, var(--color-slate-soft) 100%);
   pointer-events: none;
   contain: strict;
   animation:
@@ -2197,7 +2183,7 @@ html.intro-on.intro-done .tp-intro {
 }
 
 .tp-intro-wisps path {
-  stroke: var(--color-cream);
+  stroke: var(--color-basalt);
   stroke-width: 1.4;
   stroke-linecap: round;
   stroke-dasharray: 1;
@@ -2226,12 +2212,13 @@ html.intro-on.intro-done .tp-intro {
 
 .tp-intro-name {
   display: block;
-  font-family: var(--font-cormorant), Georgia, serif;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-weight: 300;
+  text-transform: uppercase;
   font-size: clamp(2.4rem, 1.4rem + 5vw, 5rem);
   line-height: 1;
   letter-spacing: 0.01em;
-  color: var(--color-cream);
+  color: var(--color-bone);
   white-space: nowrap;
   translate: 0 110%;
   animation: tp-surface-up 1100ms 850ms var(--ease-liquid) forwards;
@@ -2241,19 +2228,19 @@ html.intro-on.intro-done .tp-intro {
   display: block;
   inline-size: 100%;
   block-size: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-sand) 20%, var(--color-sand) 80%, transparent);
+  background: linear-gradient(90deg, transparent, var(--color-amber) 20%, var(--color-amber) 80%, transparent);
   scale: 0 1;
   animation: tp-line-draw 800ms 100ms var(--ease-liquid) forwards;
 }
 
 .tp-intro-line {
   margin-block-start: 1rem;
-  font-family: var(--font-manrope), system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--color-sand);
+  color: var(--color-amber);
   opacity: 0;
   animation: tp-line-in 900ms 1450ms var(--ease-liquid) forwards;
 }
@@ -2466,7 +2453,7 @@ html.js-motion .tp-reveal:not(.is-visible) {
 .live-map .leaflet-container {
   font: inherit;
   font-size: 0.75rem;
-  background: #e8e6e1;
+  background: #1e2326;
 }
 
 .live-map .leaflet-bar.leaflet-control-zoom a {

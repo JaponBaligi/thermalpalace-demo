@@ -15,7 +15,7 @@ import "@/app/globals.css";
 // Runs before the intro markup is parsed: LITE quality default, motion start states, and the intro once per session (key thermalpalace-intro).
 const bootScript = `(function(){var d=document.documentElement;d.setAttribute("data-quality","lite");try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;d.classList.add("js-motion");setTimeout(function(){if(!d.classList.contains("motion-ready"))d.classList.remove("js-motion")},4000);if(sessionStorage.getItem("thermalpalace-intro")){d.classList.add("intro-seen");return}sessionStorage.setItem("thermalpalace-intro","1");d.classList.add("intro-on");var ev=["pointerdown","keydown","wheel","touchstart"],done=function(){d.classList.add("intro-done");ev.forEach(function(e){removeEventListener(e,done)})};ev.forEach(function(e){addEventListener(e,done,{passive:true})});setTimeout(done,3300)}catch(e){}})();`;
 
-export const shellViewport: Viewport = { themeColor: "#f6f1e8" };
+export const shellViewport: Viewport = { themeColor: "#14171a" };
 
 export function LocaleShell({ locale, children }: { locale: Locale; children: ReactNode }) {
   const c = t(locale);

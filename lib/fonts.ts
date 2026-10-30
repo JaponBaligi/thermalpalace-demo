@@ -1,19 +1,22 @@
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 
-/** Display: 500 + 500 italic only (tagline). latin-ext preloaded too: headings use ğ ş İ ı, late swap shifts layout. */
-export const cormorant = Cormorant_Garamond({
-  subsets: ["latin", "latin-ext"],
-  weight: ["500"],
-  style: ["normal", "italic"],
+/**
+ * Display: General Sans variable (Indian Type Foundry, ITF Free Font License via Fontshare; self-hosting for own
+ * websites is permitted, license text in public/fonts/GeneralSans-LICENSE.txt). Covers ğ ş ı İ ç ö ü.
+ */
+export const generalSans = localFont({
+  src: "../public/fonts/GeneralSans-Variable.woff2",
+  weight: "200 700",
   display: "swap",
-  variable: "--font-cormorant",
+  variable: "--font-general-sans",
 });
 
 /** UI and body. Variable weight axis. */
-export const manrope = Manrope({
+export const inter = Inter({
   subsets: ["latin", "latin-ext"],
   display: "swap",
-  variable: "--font-manrope",
+  variable: "--font-inter",
 });
 
-export const fontVars = `${cormorant.variable} ${manrope.variable}`;
+export const fontVars = `${generalSans.variable} ${inter.variable}`;

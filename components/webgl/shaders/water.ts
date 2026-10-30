@@ -110,7 +110,7 @@ void main() {
     float F = 0.07 + 0.93 * pow(1.0 - ndv, 5.0);
     vec3 R = reflect(dir, n);
     R.y = abs(R.y);
-    vec3 refl = sky(R) * vec3(0.925, 0.968, 0.966);
+    vec3 refl = sky(R) * vec3(0.95, 0.93, 0.90);
 
     float steep = clamp(-dir.y, 0.0, 1.0);
     vec3 body = mix(WATER, DEEP, smoothstep(0.15, 0.85, steep));
@@ -125,15 +125,15 @@ void main() {
 #else
     float caustic = pow(c1, 8.0) * 0.75;
 #endif
-    body += vec3(1.0, 0.96, 0.86) * caustic * 0.17 * floorFade;
+    body += SAND * caustic * 0.32 * floorFade;
     col = mix(body, refl, F);
 
     // sun glints only where the waves still resolve; far, flat water would mirror the whole disc
     float sun = max(dot(R, uSunDir), 0.0);
     float glint = pow(sun, 3000.0) * 1.6 * (1.0 - smoothstep(8.0, 30.0, dist));
-    col += vec3(1.0, 0.94, 0.82) * (glint + pow(sun, 80.0) * 0.035);
+    col += vec3(1.0, 0.78, 0.50) * (glint + pow(sun, 80.0) * 0.035);
     vec3 top = normalize(vec3(-0.35, 1.0, 0.3));
-    col += vec3(1.0, 0.98, 0.94) * pow(max(dot(R, top), 0.0), 80.0) * 0.22;
+    col += vec3(0.95, 0.90, 0.82) * pow(max(dot(R, top), 0.0), 80.0) * 0.08;
 
     col = mix(col, MIST, smoothstep(6.0, 60.0, dist) * 0.6);
   }
@@ -148,6 +148,6 @@ void main() {
 #else
   col += (hash12(gl_FragCoord.xy) - 0.5) / 255.0;
 #endif
-  fragColor = vec4(max(col, DEEP), 1.0);
+  fragColor = vec4(clamp(col, DEEP, CEIL), 1.0);
 }
 `;

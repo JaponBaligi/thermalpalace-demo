@@ -10,18 +10,19 @@ void main() {
 `;
 
 /**
- * Palette (57 §2) in sRGB, shared by the passes. DEEP is also the per-channel floor of the final output
- * (relative luminance ≈ 0.575): the copper-deep kicker and muted text over the water stay ≥ 4.5:1.
+ * Palette, art direction A "Taş ve Buhar" (sRGB, shared by the passes): dark mineral water, warm grey steam, amber light.
+ * The final output is clamped to [DEEP, CEIL]; CEIL (relative luminance ≈ 0.12) keeps bone text over the water ≥ 4.5:1.
  */
 export const palette = /* glsl */ `
-const vec3 CREAM = vec3(0.965, 0.945, 0.910);
-const vec3 PAPER = vec3(0.984, 0.973, 0.949);
-const vec3 HAZE = vec3(0.945, 0.937, 0.906);
-const vec3 MIST = vec3(0.886, 0.925, 0.910);
-const vec3 WATER = vec3(0.812, 0.890, 0.882);
-const vec3 DEEP = vec3(0.680, 0.810, 0.795);
-const vec3 SAND = vec3(0.851, 0.725, 0.549);
-const vec3 PETROL = vec3(0.071, 0.224, 0.247);
-const vec3 STEAM_LIT = vec3(0.988, 0.982, 0.962);
-const vec3 STEAM_SHADE = vec3(0.745, 0.808, 0.806);
+const vec3 CREAM = vec3(0.110, 0.125, 0.137);
+const vec3 PAPER = vec3(0.165, 0.192, 0.200);
+const vec3 HAZE = vec3(0.090, 0.102, 0.110);
+const vec3 MIST = vec3(0.078, 0.090, 0.102);
+const vec3 WATER = vec3(0.060, 0.072, 0.078);
+const vec3 DEEP = vec3(0.035, 0.040, 0.045);
+const vec3 CEIL = vec3(0.380, 0.370, 0.355);
+const vec3 SAND = vec3(0.784, 0.529, 0.227);
+const vec3 PETROL = vec3(0.165, 0.192, 0.200);
+const vec3 STEAM_LIT = vec3(0.420, 0.400, 0.370);
+const vec3 STEAM_SHADE = vec3(0.120, 0.130, 0.140);
 `;
