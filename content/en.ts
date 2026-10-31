@@ -138,6 +138,7 @@ export const en: SiteContent = {
     spaHeading: "Spa",
     massage: "[[Massage options to be supplied by the property]]",
     sessionsHeading: "Sessions",
+    duoTitle: ["From Thermal", "To Forest"],
     waterHeading: "Thermal water",
     water: "The pools are fed with thermal water from the Termal district.",
     walkHeading: "Nature walks",

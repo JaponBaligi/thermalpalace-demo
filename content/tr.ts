@@ -139,6 +139,7 @@ export const tr = {
     spaHeading: "SPA",
     massage: "[[Masaj çeşitleri işletmeden alınacak]]",
     sessionsHeading: "Seanslar",
+    duoTitle: ["Termalden", "Ormana"] as [string, string],
     waterHeading: "Termal su",
     water: "Havuzlar Termal ilçesinin termal suyuyla beslenir.",
     walkHeading: "Doğada yürüyüş",

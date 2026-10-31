@@ -1180,6 +1180,7 @@ html.lenis body {
 
   /* spa: "thermal water | walking in nature" duo; static backgrounds first, canvases only add light */
   .tp-duo {
+    position: relative;
     display: grid;
     grid-template-rows: 1fr auto 1fr;
     block-size: 100vh;
@@ -1257,8 +1258,51 @@ html.lenis body {
     background: linear-gradient(180deg, rgb(14 16 18 / 0.45), rgb(14 16 18 / 0.72));
   }
 
+  /* title straddling the rule: mobile = one word above, one below the horizontal rule */
+  .tp-duo-title {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 50%;
+    z-index: 4;
+    display: grid;
+    justify-items: center;
+    row-gap: 2.6rem;
+    margin: 0;
+    translate: 0 -50%;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 1rem + 2vw, 2.6rem);
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-bone);
+    text-shadow: 0 1px 14px rgb(14 16 18 / 0.8);
+    pointer-events: none;
+  }
+
+  @media (min-width: 64rem) {
+    .tp-duo-title {
+      inset-block-start: clamp(2rem, 8svh, 5rem);
+      grid-template-columns: 1fr 1px 1fr;
+      align-items: baseline;
+      column-gap: 2.25rem;
+      translate: none;
+    }
+
+    .tp-duo-title span:first-child {
+      grid-column: 1;
+      justify-self: end;
+    }
+
+    .tp-duo-title span:last-child {
+      grid-column: 3;
+      justify-self: start;
+    }
+  }
+
   .tp-duo-rule {
     position: relative;
+    z-index: 3;
     block-size: 1px;
     background: #a88b57;
   }

@@ -285,10 +285,13 @@ function ForestHalf({ children }: { children: ReactNode }) {
   );
 }
 
-/** "Thermal water | walking in nature": two interactive halves with a matte gold rule and rosette between them. */
-export function SpaDuo({ water, forest }: { water: ReactNode; forest: ReactNode }) {
+/** "Thermal water | walking in nature": full-bleed, one viewport tall; the title straddles the matte gold rule and rosette. */
+export function SpaDuo({ title, water, forest }: { title: readonly [string, string]; water: ReactNode; forest: ReactNode }) {
   return (
     <div className="tp-duo">
+      <h2 id="tp-duo-h" className="tp-duo-title">
+        <span>{title[0]}</span> <span>{title[1]}</span>
+      </h2>
       <WaterHalf>{water}</WaterHalf>
       <div className="tp-duo-rule" aria-hidden="true" />
       <ForestHalf>{forest}</ForestHalf>

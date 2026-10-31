@@ -57,14 +57,13 @@ export function SpaPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="tp-section" aria-labelledby="tp-water-h">
-        <div className="tp-wrap tp-reveal">
+      <section className="tp-section" aria-labelledby="tp-duo-h">
+        <div className="tp-reveal">
           <SpaDuo
+            title={p.duoTitle}
             water={
               <>
-                <h2 id="tp-water-h" className="tp-h2">
-                  {p.waterHeading}
-                </h2>
+                <h3 className="tp-h2">{p.waterHeading}</h3>
                 <p>
                   <Rich text={p.water} locale={locale} />
                 </p>
@@ -72,7 +71,7 @@ export function SpaPage({ locale }: { locale: Locale }) {
             }
             forest={
               <>
-                <h2 className="tp-h2">{p.walkHeading}</h2>
+                <h3 className="tp-h2">{p.walkHeading}</h3>
                 <p>
                   <Rich text={p.walk} locale={locale} />
                 </p>
