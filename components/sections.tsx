@@ -3,7 +3,7 @@ import { t } from "@/content";
 import { unitFeatures, units } from "@/content/units";
 import { facilities, pools, sessions } from "@/content/spa";
 import { telLink } from "@/lib/contact";
-import { delay, PhoneIcon, Rich, UnitGlyph, Verify, WaterPlate } from "./ui";
+import { delay, PhoneIcon, Rich, UnitGlyph, WaterPlate } from "./ui";
 
 /** Pool "plates": one card per pool, procedural art on top. P3 pins these horizontally on desktop. */
 export function PoolCards({ locale, headingLevel = 3, interactive = false }: { locale: Locale; headingLevel?: 2 | 3; interactive?: boolean }) {
@@ -18,12 +18,6 @@ export function PoolCards({ locale, headingLevel = 3, interactive = false }: { l
             <p className="tp-pool-season">{p.season[locale]}</p>
             <H className="tp-h3">
               {p.name[locale]}
-              {p.verify ? (
-                <>
-                  {" "}
-                  <Verify locale={locale} />
-                </>
-              ) : null}
             </H>
             {p.line ? <p className="tp-pool-line">{p.line[locale]}</p> : null}
           </div>
@@ -41,17 +35,8 @@ export function FacilityList({ locale, headingLevel = 3 }: { locale: Locale; hea
     <ul className="tp-facilities">
       {facilities.map((f, i) => (
         <li key={f.id} className="tp-facility tp-reveal" style={delay(i * 70)}>
-          <span className="tp-facility-index" aria-hidden="true">
-            {String(i + 1).padStart(2, "0")}
-          </span>
           <H className="tp-facility-name">
             {f.name[locale]}
-            {f.verify ? (
-              <>
-                {" "}
-                <Verify locale={locale} />
-              </>
-            ) : null}
           </H>
           {f.line ? <p className="tp-facility-line">{f.line[locale]}</p> : null}
         </li>
@@ -133,19 +118,8 @@ export function UnitCards({ locale, headingLevel = 3, withCta = false }: { local
             </p>
             <H className="tp-h3">
               {unit.name[locale]}
-              {unit.verify ? (
-                <>
-                  {" "}
-                  <Verify locale={locale} />
-                </>
-              ) : null}
             </H>
             <p className="tp-unit-line">{unit.line[locale]}</p>
-            <ul className="tp-unit-tags">
-              {unit.levels === 2 ? <li>{u.duplex}</li> : null}
-              <li>{u.kitchen}</li>
-              {unit.hamam ? <li>{u.hamam}</li> : null}
-            </ul>
             {withCta ? (
               <a href={telLink} className="tp-btn tp-btn-copper tp-unit-cta">
                 <PhoneIcon />
@@ -180,12 +154,6 @@ export function UnitTable({ locale, captionVisible = false }: { locale: Locale; 
             <tr key={unit.id}>
               <th scope="row">
                 {unit.name[locale]} <span className="tp-table-code">({unit.code})</span>
-                {unit.verify ? (
-                  <>
-                    {" "}
-                    <Verify locale={locale} />
-                  </>
-                ) : null}
               </th>
               <td data-label={u.cols.guests}>{unit.guests}</td>
               <td data-label={u.cols.layout}>{unit.layout[locale]}</td>

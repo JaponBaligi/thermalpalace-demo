@@ -1,5 +1,5 @@
 /**
- * Turkish copy (source language). `[?]` = "teyit edilecek" label on the demo; `[[...]]` = labelled placeholder.
+ * Turkish copy (source language). `[[...]]` = labelled placeholder.
  * Neutral thermal vocabulary only (57 U5): "termal su", "termal havuz", "hamam", "dinlenmek".
  */
 export const tr = {
@@ -21,11 +21,10 @@ export const tr = {
     whatsappPending: "Numara işletmeden alınacak",
     whatsappPendingShort: "numara alınacak",
     newTab: "(yeni sekmede açılır)",
-    verify: "teyit edilecek",
     stickyLabel: "Hızlı iletişim",
     phone: "Telefon",
     address: "Adres",
-    addressLines: ["Köyiçi Mah., Killi Orman Sok. No: 23 [?]", "Akköy, 77400 Termal / Yalova"],
+    addressLines: ["Köyiçi Mah., Killi Orman Sok. No: 23", "Akköy, 77400 Termal / Yalova"],
     strip: {
       heading: "Bilgi ve rezervasyon için arayın",
       text: "Müsaitlik, daire tipleri ve SPA hakkında bilgi için resepsiyonu arayın.",
@@ -36,7 +35,7 @@ export const tr = {
       contact: "İletişim",
       legal: "[[Ticari unvan ve Turizm İşletme Belgesi No işletmeden alınacak]]",
       rights: "Yalova Thermal Palace",
-      demo: "Örnek tasarım – içerik işletmeyle netleştirilecek.",
+      demo: "Örnek tasarım – bilgiler işletmeyle teyit edilecek.",
       osm: "Harita verisi © OpenStreetMap katkıcıları",
       credits: "Görsel kaynakları",
       liteMode: "Hafif mod",
@@ -66,7 +65,6 @@ export const tr = {
 
   home: {
     hero: {
-      eyebrow: "Akköy · Termal · Yalova",
       tagline: "Termal'de sakin bir mola",
       sub: "Termal ilçesinde, Killi Orman mevkiinde mutfaklı daireler, kapalı termal havuz ve SPA.",
       ctaRooms: "Daireleri görün",
@@ -74,43 +72,37 @@ export const tr = {
       factsLabel: "Tesiste öne çıkanlar",
     },
     surface: {
-      kicker: "Pratik bilgi",
       heading: "Gelmeden önce bilmeniz gerekenler",
       services: "Tesiste",
-      list: ["Restoran", "À la carte restoran [?]", "Market", "Çamaşırhane", "Tesiste otopark", "Ücretsiz Wi-Fi"],
+      list: ["Restoran", "À la carte restoran", "Market", "Çamaşırhane", "Tesiste otopark", "Ücretsiz Wi-Fi"],
       board: "[[Konaklama seçenekleri (oda-kahvaltı / yarım pansiyon) işletmeden alınacak]]",
-      reception: "Resepsiyon 24 saat [?]",
+      reception: "Resepsiyon 24 saat",
     },
     pools: {
-      kicker: "Havuzlar",
       heading: "Dört mevsim termal havuz",
       text: "Kapalı termal havuz yıl boyu, açık havuz yaz aylarında açık. Havuz saatleri ve kullanım kuralları için resepsiyonu arayın.",
       link: "Termal ve SPA",
     },
     spa: {
-      kicker: "SPA",
       heading: "Hamam, sauna ve SPA",
-      text: "SPA bölümünde Türk hamamı, sauna, buhar odası, tuz odası [?] ve masaj odaları bulunur.",
-      sessionsHeading: "Kadın, erkek ve karma seanslar [?]",
+      text: "SPA bölümünde Türk hamamı, sauna, buhar odası, tuz odası ve masaj odaları bulunur.",
+      sessionsHeading: "Kadın, erkek ve karma seanslar",
       sessionsText: "Seans saatleri işletmeden alındığında burada tablo olarak yer alacak. Şimdilik saatler için arayın.",
       sessionsCta: "Seans saatleri için arayın",
     },
     rooms: {
-      kicker: "Odalar",
       heading: "Ev gibi daireler",
       text: "Odalarımız mutfaklı daire tipindedir; elektrikli ocak, fırın ve mini buzdolabı her dairede bulunur. Üç tip, üç ila yedi kişilik.",
       link: "Tüm odalar",
     },
     location: {
-      kicker: "Konum",
       heading: "Akköy'de, Killi Orman mevkiinde",
       text: "Tesis Yalova'nın Termal ilçesinde, Akköy köyü sınırlarında, Killi Orman mevkiindedir.",
-      distance: "Yalova merkezine yaklaşık 9 km [?]",
-      since: "Yalova Thermal Palace 2015'ten beri misafir ağırlıyor. [?]",
+      distance: "Yalova merkezine yaklaşık 9 km",
+      since: "Yalova Thermal Palace 2015'ten beri misafir ağırlıyor.",
       link: "Yol tarifi ve iletişim",
     },
     contact: {
-      kicker: "İletişim",
       heading: "Arayın",
       text: "Müsaitlik ve rezervasyon için resepsiyonu arayın.",
     },
@@ -119,9 +111,6 @@ export const tr = {
   units: {
     guests: (n: number) => `${n} kişiye kadar`,
     guestsShort: (n: number) => `${n} kişi`,
-    duplex: "Dubleks",
-    kitchen: "Mutfaklı",
-    hamam: "Dairede Türk hamamı",
     codeNote: "İşletmenin kullandığı kod",
     cta: "Müsaitlik için arayın",
     tableCaption: "Daire tiplerinin karşılaştırması",
@@ -133,7 +122,6 @@ export const tr = {
   },
 
   roomsPage: {
-    kicker: "Odalar",
     h1: "Daire tipi odalar",
     lead: "Tüm odalarımız mutfaklı daire tipindedir. Müsaitlik ve rezervasyon için bizi arayın.",
     typesHeading: "Üç daire tipi",
@@ -144,7 +132,6 @@ export const tr = {
   },
 
   spaPage: {
-    kicker: "Termal ve SPA",
     h1: "Termal havuz ve SPA",
     lead: "Tesiste yıl boyu açık kapalı termal havuz, yaz aylarında açık havuz ve hamam, sauna, buhar odası ve masaj odalarından oluşan bir SPA bölümü var.",
     poolsHeading: "Havuzlar",
@@ -153,24 +140,23 @@ export const tr = {
     massage: "[[Masaj çeşitleri işletmeden alınacak]]",
     sessionsHeading: "Seanslar",
     waterHeading: "Termal su",
-    water: "Havuzlar Termal ilçesinin termal suyuyla beslenir. [?]",
+    water: "Havuzlar Termal ilçesinin termal suyuyla beslenir.",
     walkHeading: "Doğada yürüyüş",
-    walk: "Tesisin çevresinde yeşillik içinde yürüyüş yolları var. [?]",
-    gym: "Spor salonu [?]",
+    walk: "Tesisin çevresinde yeşillik içinde yürüyüş yolları var.",
+    gym: "Spor salonu",
     note: "SPA hizmetleri ve saatleri sezona göre değişebilir.",
   },
 
   contactPage: {
-    kicker: "Konum ve iletişim",
     h1: "Konum ve iletişim",
     lead: "Yalova'nın Termal ilçesinde, Akköy'de, Killi Orman mevkiindeyiz.",
     detailsHeading: "İletişim bilgileri",
     receptionLabel: "Resepsiyon",
-    reception: "24 saat [?]",
+    reception: "24 saat",
     whatsappLabel: "WhatsApp",
     gettingHeading: "Ulaşım",
     getting: "İstanbul'dan Yalova'ya feribot ve deniz otobüsüyle, Bursa ve Kocaeli yönünden karayoluyla ulaşılır.",
-    distance: "Yalova merkezine yaklaşık 9 km [?]",
+    distance: "Yalova merkezine yaklaşık 9 km",
     transit: "[[Akköy'e minibüs veya servis bilgisi işletmeden alınacak]]",
     parking: "Tesiste otopark var.",
     mapHeading: "Harita",
@@ -183,7 +169,4 @@ export const tr = {
   notFound: {
     title: "Aradığınız sayfa bulunamadı.",
   },
-
-  /** Decorative depth markers of the "descent" (aria-hidden). */
-  depth: ["0 m", "−1 m", "−3 m", "−5 m", "−7 m", "+0 m", "+1 m"],
 };

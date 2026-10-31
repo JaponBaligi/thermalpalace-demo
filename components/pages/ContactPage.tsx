@@ -11,7 +11,7 @@ export function ContactPage({ locale }: { locale: Locale }) {
   const p = c.contactPage;
   return (
     <>
-      <PageHero kicker={p.kicker} title={p.h1} lead={p.lead} />
+      <PageHero title={p.h1} lead={p.lead} />
 
       <section className="tp-section tp-paper" aria-labelledby="tp-details-h">
         <div className="tp-wrap tp-contact-grid">

@@ -7,18 +7,17 @@ import { PoolsShowcase } from "../PoolsShowcase";
 import { pools } from "@/content/spa";
 import { MapBlock } from "../MapBlock";
 import { FacilityList, PoolCards, Sessions, UnitCards, UnitFeatures } from "../sections";
-import { ArrowIcon, delay, Kicker, NewTab, PhoneIcon, PinIcon, Rich, Ridges, WaterLine, WhatsAppPending } from "../ui";
+import { ArrowIcon, delay, NewTab, PhoneIcon, PinIcon, Rich, Ridges, WaterLine, WhatsAppPending } from "../ui";
 
 export function HomePage({ locale }: { locale: Locale }) {
   const c = t(locale);
   const h = c.home;
   const r = routes[locale];
   const a = anchors[locale];
-  const depth = c.depth;
 
   return (
     <>
-      {/* S0 — steam */}
+      {/* S0 — hero */}
       <section className="tp-hero" data-scene="0" aria-labelledby="tp-hero-h">
         <div className="tp-hero-photo" aria-hidden="true">
           {/* static export: pre-sized WebP, no next/image optimiser */}
@@ -35,9 +34,6 @@ export function HomePage({ locale }: { locale: Locale }) {
           />
         </div>
         <div className="tp-wrap tp-hero-inner">
-          <p className="tp-eyebrow tp-enter" style={delay(0)}>
-            {h.hero.eyebrow}
-          </p>
           <h1 id="tp-hero-h" className="tp-display tp-hero-title">
             <span className="tp-hero-l1 tp-enter" style={delay(60)}>
               Yalova
@@ -86,7 +82,6 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
         <div className="tp-wrap tp-surface-grid">
           <div className="tp-reveal">
-            <Kicker depth={depth[1]}>{h.surface.kicker}</Kicker>
             <h2 id="tp-s1-h" className="tp-h2">
               {h.surface.heading}
             </h2>
@@ -118,13 +113,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             </div>
             <div className="tp-float tp-float-wide tp-reveal" style={delay(180)}>
               <p className="tp-float-label">{h.surface.services}</p>
-              <ul className="tp-chips">
-                {h.surface.list.map((s) => (
-                  <li key={s}>
-                    <Rich text={s} locale={locale} />
-                  </li>
-                ))}
-              </ul>
+              <p className="tp-float-value">{h.surface.list.join(" · ")}</p>
               <p className="tp-float-ph">
                 <Rich text={h.surface.board} locale={locale} />
               </p>
@@ -139,7 +128,6 @@ export function HomePage({ locale }: { locale: Locale }) {
         <PoolsShowcase ids={pools.map((p) => p.id)} names={pools.map((p) => p.name[locale])}>
           <div className="tp-wrap">
             <div className="tp-scene-head tp-pools-head tp-reveal">
-              <Kicker depth={depth[2]}>{h.pools.kicker}</Kicker>
               <h2 id="tp-s2-h" className="tp-h2 tp-h2-xl">
                 {h.pools.heading}
               </h2>
@@ -162,7 +150,6 @@ export function HomePage({ locale }: { locale: Locale }) {
         <SpaWater />
         <div className="tp-wrap tp-spa-grid">
           <div className="tp-reveal">
-            <Kicker depth={depth[3]}>{h.spa.kicker}</Kicker>
             <h2 id="tp-s3-h" className="tp-h2 tp-h2-xl">
               {h.spa.heading}
             </h2>
@@ -182,7 +169,6 @@ export function HomePage({ locale }: { locale: Locale }) {
         <div className="tp-mirror" aria-hidden="true" />
         <div className="tp-wrap">
           <div className="tp-scene-head tp-reveal">
-            <Kicker depth={depth[4]}>{h.rooms.kicker}</Kicker>
             <h2 id="tp-s4-h" className="tp-h2 tp-h2-xl">
               {h.rooms.heading}
             </h2>
@@ -206,7 +192,6 @@ export function HomePage({ locale }: { locale: Locale }) {
       <section id={a.location} className="tp-scene tp-dusk" data-scene="5" aria-labelledby="tp-s5-h">
         <div className="tp-wrap tp-dusk-grid">
           <div className="tp-reveal">
-            <Kicker depth={depth[5]}>{h.location.kicker}</Kicker>
             <h2 id="tp-s5-h" className="tp-h2 tp-h2-xl">
               {h.location.heading}
             </h2>
@@ -242,7 +227,6 @@ export function HomePage({ locale }: { locale: Locale }) {
       <section className="tp-scene tp-copper tp-dark" data-scene="6" aria-labelledby="tp-s6-h">
         <div className="tp-halo" aria-hidden="true" />
         <div className="tp-wrap tp-copper-inner">
-          <Kicker depth={depth[6]}>{h.contact.kicker}</Kicker>
           <h2 id="tp-s6-h" className="tp-display tp-copper-title">
             {h.contact.heading}
           </h2>

@@ -14,7 +14,7 @@ export function SpaPage({ locale }: { locale: Locale }) {
   const p = c.spaPage;
   return (
     <>
-      <PageHero kicker={p.kicker} title={p.h1} lead={p.lead} />
+      <PageHero title={p.h1} lead={p.lead} />
 
       <section className="tp-scene tp-pools-scene tp-dark" data-scene="2" aria-labelledby="tp-pools-h">
         <div className="tp-rays" aria-hidden="true" />

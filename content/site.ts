@@ -1,5 +1,5 @@
 /**
- * While true: noindex (meta + vercel.json) and "teyit edilecek" labels on unconfirmed items (`[?]` / `verify: true`).
+ * While true: noindex (meta + vercel.json) and one site-wide "teyit edilecek" note in the footer.
  * Canonical, hreflang, og:url and the sitemap are always emitted (57 §1 U13).
  * Before launch, remove every unconfirmed item the owner has not confirmed; do not just flip this flag.
  */

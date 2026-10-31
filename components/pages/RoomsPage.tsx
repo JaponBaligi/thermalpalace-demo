@@ -12,7 +12,7 @@ export function RoomsPage({ locale }: { locale: Locale }) {
   const p = c.roomsPage;
   return (
     <>
-      <PageHero kicker={p.kicker} title={p.h1} lead={p.lead}>
+      <PageHero title={p.h1} lead={p.lead}>
         <div className="tp-btn-row">
           <a href={telLink} className="tp-btn tp-btn-copper">
             <PhoneIcon />

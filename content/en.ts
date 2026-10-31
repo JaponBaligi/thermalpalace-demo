@@ -1,6 +1,6 @@
 import type { SiteContent } from ".";
 
-/** English translation of tr.ts (native check is an open item). Same markers: `[?]` and `[[...]]`. */
+/** English translation of tr.ts (native check is an open item). Same marker: `[[...]]`. */
 export const en: SiteContent = {
   common: {
     skip: "Skip to content",
@@ -20,11 +20,10 @@ export const en: SiteContent = {
     whatsappPending: "Number to be supplied by the property",
     whatsappPendingShort: "number pending",
     newTab: "(opens in a new tab)",
-    verify: "to be confirmed",
     stickyLabel: "Quick contact",
     phone: "Phone",
     address: "Address",
-    addressLines: ["Köyiçi Mah., Killi Orman Sok. No: 23 [?]", "Akköy, 77400 Termal, Yalova, Türkiye"],
+    addressLines: ["Köyiçi Mah., Killi Orman Sok. No: 23", "Akköy, 77400 Termal, Yalova, Türkiye"],
     strip: {
       heading: "Call for information and bookings",
       text: "Call reception for availability, apartment types and the spa.",
@@ -35,7 +34,7 @@ export const en: SiteContent = {
       contact: "Contact",
       legal: "[[Legal name and tourism licence number to be supplied by the property]]",
       rights: "Yalova Thermal Palace",
-      demo: "Sample design – content to be confirmed with the business.",
+      demo: "Sample design – details to be confirmed with the business.",
       osm: "Map data © OpenStreetMap contributors",
       credits: "Image credits",
       liteMode: "Lite mode",
@@ -65,7 +64,6 @@ export const en: SiteContent = {
 
   home: {
     hero: {
-      eyebrow: "Akköy · Termal · Yalova",
       tagline: "A calm break in Termal",
       sub: "Apartments with kitchens, an indoor thermal pool and a spa in the Killi Orman area of Termal, Yalova.",
       ctaRooms: "See the apartments",
@@ -73,43 +71,37 @@ export const en: SiteContent = {
       factsLabel: "On site",
     },
     surface: {
-      kicker: "Practical",
       heading: "Good to know before you come",
       services: "On site",
-      list: ["Restaurant", "À la carte restaurant [?]", "Shop", "Laundry", "On-site parking", "Free Wi-Fi"],
+      list: ["Restaurant", "À la carte restaurant", "Shop", "Laundry", "On-site parking", "Free Wi-Fi"],
       board: "[[Board options (bed & breakfast / half board) to be supplied by the property]]",
-      reception: "Reception 24 hours [?]",
+      reception: "Reception 24 hours",
     },
     pools: {
-      kicker: "Pools",
       heading: "A thermal pool all year round",
       text: "The indoor thermal pool is open all year, the outdoor pool in summer. Call reception for pool hours and rules.",
       link: "Thermal & spa",
     },
     spa: {
-      kicker: "Spa",
       heading: "Hamam, sauna and spa",
-      text: "The spa has a Turkish bath, sauna, steam room, salt room [?] and massage rooms.",
-      sessionsHeading: "Sessions for women, men and mixed [?]",
+      text: "The spa has a Turkish bath, sauna, steam room, salt room and massage rooms.",
+      sessionsHeading: "Sessions for women, men and mixed",
       sessionsText: "Session hours will appear here as a table once the property supplies them. For now, please call.",
       sessionsCta: "Call for session hours",
     },
     rooms: {
-      kicker: "Rooms",
       heading: "Apartment-style rooms",
       text: "Our rooms are apartments with kitchens: every unit has an electric hob, an oven and a mini fridge. Three types, for three to seven guests.",
       link: "All rooms",
     },
     location: {
-      kicker: "Location",
       heading: "In Akköy, Killi Orman area",
       text: "The property is in the Termal district of Yalova, within Akköy village, in the Killi Orman area.",
-      distance: "About 9 km from Yalova centre [?]",
-      since: "Yalova Thermal Palace has welcomed guests since 2015. [?]",
+      distance: "About 9 km from Yalova centre",
+      since: "Yalova Thermal Palace has welcomed guests since 2015.",
       link: "Directions and contact",
     },
     contact: {
-      kicker: "Contact",
       heading: "Call us",
       text: "Call reception for availability and bookings.",
     },
@@ -118,9 +110,6 @@ export const en: SiteContent = {
   units: {
     guests: (n: number) => `Up to ${n} guests`,
     guestsShort: (n: number) => `${n} guests`,
-    duplex: "Duplex",
-    kitchen: "Kitchen",
-    hamam: "Private Turkish bath",
     codeNote: "Code used by the property",
     cta: "Call for availability",
     tableCaption: "Apartment types compared",
@@ -132,7 +121,6 @@ export const en: SiteContent = {
   },
 
   roomsPage: {
-    kicker: "Rooms",
     h1: "Apartment-style rooms",
     lead: "All our rooms are apartments with a kitchen. Call us for availability and bookings.",
     typesHeading: "Three apartment types",
@@ -143,7 +131,6 @@ export const en: SiteContent = {
   },
 
   spaPage: {
-    kicker: "Thermal & Spa",
     h1: "Thermal pool & spa",
     lead: "The property has an indoor thermal pool open all year, an outdoor pool in summer, and a spa with a Turkish bath, sauna, steam room and massage rooms.",
     poolsHeading: "Pools",
@@ -152,24 +139,23 @@ export const en: SiteContent = {
     massage: "[[Massage options to be supplied by the property]]",
     sessionsHeading: "Sessions",
     waterHeading: "Thermal water",
-    water: "The pools are fed with thermal water from the Termal district. [?]",
+    water: "The pools are fed with thermal water from the Termal district.",
     walkHeading: "Nature walks",
-    walk: "There are walking paths in the green surroundings. [?]",
-    gym: "Gym [?]",
+    walk: "There are walking paths in the green surroundings.",
+    gym: "Gym",
     note: "Spa services and hours may vary by season.",
   },
 
   contactPage: {
-    kicker: "Location & contact",
     h1: "Location & contact",
     lead: "We are in Akköy, Killi Orman area, in the Termal district of Yalova.",
     detailsHeading: "Contact details",
     receptionLabel: "Reception",
-    reception: "24 hours [?]",
+    reception: "24 hours",
     whatsappLabel: "WhatsApp",
     gettingHeading: "Getting here",
     getting: "Yalova is reached from Istanbul by ferry and fast ferry, and by road from Bursa and Kocaeli.",
-    distance: "About 9 km from Yalova centre [?]",
+    distance: "About 9 km from Yalova centre",
     transit: "[[Minibus or shuttle to Akköy to be supplied by the property]]",
     parking: "There is parking on site.",
     mapHeading: "Map",
@@ -182,6 +168,4 @@ export const en: SiteContent = {
   notFound: {
     title: "Page not found.",
   },
-
-  depth: ["0 m", "−1 m", "−3 m", "−5 m", "−7 m", "+0 m", "+1 m"],
 };

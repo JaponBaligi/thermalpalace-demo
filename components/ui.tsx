@@ -1,7 +1,7 @@
-import type { CSSProperties, ReactNode, SVGProps } from "react";
+import type { CSSProperties, SVGProps } from "react";
 import type { Locale } from "@/content/routes";
 import { t } from "@/content";
-import { IS_DEMO, site } from "@/content/site";
+import { site } from "@/content/site";
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -65,15 +65,9 @@ export function NewTab({ label }: { label: string }) {
   return <span className="sr-only"> {label}</span>;
 }
 
-/** Small "teyit edilecek" / "to be confirmed" label; rendered only on the demo. */
-export function Verify({ locale }: { locale: Locale }) {
-  if (!IS_DEMO) return null;
-  return <span className="tp-verify">{t(locale).common.verify}</span>;
-}
-
-/** Renders `[[...]]` as a labelled placeholder and `[?]` as the verify label. */
-export function Rich({ text, locale }: { text: string; locale: Locale }) {
-  const parts = text.split(/(\[\[[^\]]+\]\]|\s?\[\?\])/g).filter(Boolean);
+/** Renders `[[...]]` as a labelled placeholder. */
+export function Rich({ text }: { text: string; locale: Locale }) {
+  const parts = text.split(/(\[\[[^\]]+\]\])/g).filter(Boolean);
   return (
     <>
       {parts.map((p, i) => {
@@ -81,14 +75,6 @@ export function Rich({ text, locale }: { text: string; locale: Locale }) {
           return (
             <span key={i} className="tp-ph">
               {p.slice(2, -2)}
-            </span>
-          );
-        }
-        if (p.trim() === "[?]") {
-          return (
-            <span key={i}>
-              {" "}
-              <Verify locale={locale} />
             </span>
           );
         }
@@ -125,20 +111,6 @@ export function WhatsAppPending({ locale, className = "" }: { locale: Locale; cl
 
 /** Stagger delay for `.tp-enter` / `.tp-reveal`. */
 export const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
-
-/** Section kicker with the decorative depth marker of the "descent". */
-export function Kicker({ children, depth }: { children: ReactNode; depth?: string }) {
-  return (
-    <p className="tp-kicker">
-      {depth ? (
-        <span className="tp-kicker-depth" aria-hidden="true">
-          {depth}
-        </span>
-      ) : null}
-      <span>{children}</span>
-    </p>
-  );
-}
 
 /** Thin animated water line used as a divider. Decorative. */
 export function WaterLine({ className = "" }: { className?: string }) {

@@ -13,8 +13,6 @@ export type Unit = {
   hamam: boolean;
   layout: L;
   line: L;
-  /** Own site 2025 only, conflicts with the group page (54 D3): labelled on the demo. */
-  verify: boolean;
 };
 
 /** Own site 2025 set (57 §1, 54 D3). No sizes, no counts, no prices. */
@@ -28,7 +26,6 @@ export const units: Unit[] = [
     hamam: false,
     layout: { tr: "Mutfaklı", en: "With kitchen" },
     line: { tr: "Üç kişiye kadar konaklama için mutfaklı daire.", en: "An apartment with a kitchen for up to three guests." },
-    verify: true,
   },
   {
     id: "bes-kisilik-dubleks",
@@ -39,7 +36,6 @@ export const units: Unit[] = [
     hamam: false,
     layout: { tr: "Dubleks, mutfaklı", en: "Duplex, with kitchen" },
     line: { tr: "İki katlı, mutfaklı daire; beş kişiye kadar.", en: "A two-level apartment with a kitchen, for up to five guests." },
-    verify: true,
   },
   {
     id: "yedi-kisilik-dubleks",
@@ -50,7 +46,6 @@ export const units: Unit[] = [
     hamam: true,
     layout: { tr: "Dubleks, mutfaklı, dairede Türk hamamı", en: "Duplex, kitchen, private Turkish bath" },
     line: { tr: "İki katlı, mutfaklı ve kendi Türk hamamı olan daire; yedi kişiye kadar.", en: "A two-level apartment with a kitchen and its own Turkish bath, for up to seven guests." },
-    verify: true,
   },
 ];
 

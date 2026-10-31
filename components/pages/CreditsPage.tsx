@@ -22,7 +22,7 @@ export function CreditsPage({ locale }: { locale: Locale }) {
   const c = credits[locale];
   return (
     <>
-      <PageHero kicker={c.title} title={c.title} lead={c.lead} />
+      <PageHero title={c.title} lead={c.lead} />
       <section className="tp-scene" aria-label={c.title}>
         <div className="tp-wrap">
           {c.items.map((item) => (
