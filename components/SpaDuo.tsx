@@ -163,10 +163,9 @@ function WaterHalf({ children }: { children: ReactNode }) {
 }
 
 type Print = { x: number; y: number; a: number; left: boolean; t: number };
-const STRIDE = 38; // css px between prints
 const LIFE = 3.2; // s
 
-/** Right half, "walking in nature": forest photo under a dark veil; the pointer leaves alternating footprints that fade. */
+/** Right half, "walking in nature": forest photo under a dark veil; the pointer leaves alternating left/right running-shoe prints that fade. */
 function ForestHalf({ children }: { children: ReactNode }) {
   const host = useRef<HTMLDivElement>(null);
   const cv = useRef<HTMLCanvasElement>(null);
@@ -179,29 +178,57 @@ function ForestHalf({ children }: { children: ReactNode }) {
 
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const prints: Print[] = [];
-    let lx = -1, ly = -1, acc = 0, left = true;
+    let lx = -1, ly = -1, acc = 0, left = true, size = 34;
 
     const resize = () => {
       c.width = Math.ceil(el.clientWidth * dpr);
       c.height = Math.ceil(el.clientHeight * dpr);
+      // print length scales with the viewport; one step is ~2.6 print lengths
+      size = Math.min(44, Math.max(26, Math.min(innerWidth, innerHeight) * 0.05));
+    };
+
+    /** Original running-shoe sole in units of its length (toe at -0.5), drawn as the right shoe; the left one is mirrored. */
+    const sole = () => {
+      ctx.beginPath();
+      ctx.moveTo(0.02, -0.5);
+      ctx.bezierCurveTo(0.15, -0.5, 0.2, -0.34, 0.19, -0.18); // lateral forefoot
+      ctx.bezierCurveTo(0.18, -0.02, 0.13, 0.08, 0.14, 0.2); // lateral waist
+      ctx.bezierCurveTo(0.15, 0.38, 0.1, 0.5, 0, 0.5); // heel
+      ctx.bezierCurveTo(-0.12, 0.5, -0.15, 0.36, -0.13, 0.2);
+      ctx.bezierCurveTo(-0.11, 0.08, -0.06, 0.02, -0.1, -0.1); // medial arch
+      ctx.bezierCurveTo(-0.18, -0.24, -0.19, -0.42, -0.1, -0.48); // medial forefoot
+      ctx.bezierCurveTo(-0.06, -0.5, -0.02, -0.5, 0.02, -0.5);
+      ctx.closePath();
     };
 
     const foot = (p: Print, alpha: number) => {
+      const n = p.a + Math.PI / 2;
+      const side = (p.left ? -1 : 1) * size * 0.3; // half hip width from the path centreline
       ctx.save();
-      ctx.translate(p.x + Math.cos(p.a + Math.PI / 2) * (p.left ? -7 : 7), p.y + Math.sin(p.a + Math.PI / 2) * (p.left ? -7 : 7));
-      ctx.rotate(p.a + Math.PI / 2 + (p.left ? -0.08 : 0.08));
-      ctx.scale(p.left ? -1.25 : 1.25, 1.25);
-      ctx.fillStyle = `rgba(233,228,218,${alpha})`;
-      ctx.beginPath();
-      ctx.ellipse(0, -2, 4.6, 7.2, 0.08, 0, Math.PI * 2); // ball and arch
-      ctx.ellipse(0.6, 8.6, 3.4, 3.8, 0, 0, Math.PI * 2); // heel
+      ctx.translate(p.x + Math.cos(n) * side, p.y + Math.sin(n) * side);
+      ctx.rotate(n + (p.left ? -0.07 : 0.07)); // slight toe-out
+      ctx.scale(p.left ? -size : size, size);
+      sole();
+      ctx.fillStyle = `rgba(168,139,87,${alpha})`;
       ctx.fill();
-      const toes: [number, number, number][] = [[-2.6, -11.4, 1.9], [0.4, -12.4, 1.5], [2.8, -11.6, 1.3], [4.6, -10.2, 1.1], [5.8, -8.4, 1]];
-      for (const [x, y, r] of toes) {
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fill();
+      ctx.clip();
+      // tread: zigzag lugs on the forefoot, chevrons on the heel, a flex groove at the waist
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.lineWidth = 0.022;
+      ctx.strokeStyle = "#000";
+      ctx.beginPath();
+      for (let y = -0.44; y < -0.04; y += 0.065) {
+        ctx.moveTo(-0.22, y);
+        for (let x = -0.22, k = 0; x < 0.24; x += 0.055, k++) ctx.lineTo(x, y + (k % 2 ? 0.025 : 0));
       }
+      for (let y = 0.2; y < 0.5; y += 0.06) {
+        ctx.moveTo(-0.2, y + 0.04);
+        ctx.lineTo(0, y);
+        ctx.lineTo(0.2, y + 0.04);
+      }
+      ctx.moveTo(-0.22, 0.06);
+      ctx.lineTo(0.22, 0.02);
+      ctx.stroke();
       ctx.restore();
     };
 
@@ -213,7 +240,7 @@ function ForestHalf({ children }: { children: ReactNode }) {
       while (prints.length && now - prints[0].t > LIFE) prints.shift();
       for (const p of prints) {
         const age = (now - p.t) / LIFE;
-        foot(p, 0.34 * Math.min(1, age * 8) * (1 - age) ** 1.4);
+        foot(p, 0.5 * Math.min(1, age * 8) * (1 - age) ** 1.4);
       }
       return prints.length > 0;
     };
@@ -225,7 +252,7 @@ function ForestHalf({ children }: { children: ReactNode }) {
       if (lx < 0) { lx = x; ly = y; return; }
       const d = Math.hypot(x - lx, y - ly);
       acc += d;
-      if (acc >= STRIDE && d > 0) {
+      if (acc >= size * 2.6 && d > 0) {
         acc = 0;
         prints.push({ x, y, a: Math.atan2(y - ly, x - lx), left, t: now });
         left = !left;
