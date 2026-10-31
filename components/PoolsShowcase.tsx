@@ -33,12 +33,17 @@ export function PoolsShowcase({ ids, names, children }: { ids: string[]; names: 
     let raf = 0;
     let pinned = false;
 
-    const travel = (i: number) => {
+    // two title layers: the outgoing title returns to its card while the incoming one flies into the heading slot
+    const flies = [fly, fly.cloneNode() as HTMLElement];
+    fly.after(flies[1]);
+    let cur = 0;
+
+    const travel = (i: number, el: HTMLElement) => {
       const t = cards[i].querySelector<HTMLElement>(".tp-h3");
       if (!t) return "";
       const a = t.getBoundingClientRect();
-      const b = fly.getBoundingClientRect();
-      const s = parseFloat(getComputedStyle(t).fontSize) / parseFloat(getComputedStyle(fly).fontSize);
+      const b = el.getBoundingClientRect();
+      const s = parseFloat(getComputedStyle(t).fontSize) / parseFloat(getComputedStyle(el).fontSize);
       return `translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${s})`;
     };
 
@@ -50,34 +55,35 @@ export function PoolsShowcase({ ids, names, children }: { ids: string[]; names: 
       else root.dataset.active = String(i);
     };
 
-    const show = (i: number) => {
-      active = i;
-      fly.style.top = `${heading.offsetTop}px`;
-      fly.textContent = names[i];
+    const flyOut = (i: number) => {
+      const el = flies[cur];
+      if (pinned) el.style.transform = travel(i, el);
+      el.removeAttribute("data-on");
+    };
+
+    const flyIn = (i: number) => {
+      cur = 1 - cur;
+      const el = flies[cur];
+      el.style.top = `${heading.offsetTop}px`;
+      el.textContent = names[i];
       if (pinned) {
-        fly.style.transition = "none";
-        fly.style.transform = travel(i);
-        void fly.offsetWidth;
-        fly.style.transition = "";
+        el.style.transition = "none";
+        el.style.transform = travel(i, el);
+        void el.offsetWidth;
+        el.style.transition = "";
       }
-      fly.style.transform = "";
-      mark(i);
+      el.style.transform = "";
+      el.setAttribute("data-on", "");
     };
 
-    const hide = () => {
-      const i = active;
-      active = -1;
-      if (pinned && i >= 0) fly.style.transform = travel(i);
-      mark(-1);
-    };
-
-    // one change at a time: the outgoing title returns to its card before the next one leaves
+    // card to card swaps directly (heading stays hidden, photos crossfade); the heading returns only outside the cards
     const step = () => {
       if (wait || want === active) return;
-      if (active >= 0) {
-        hide();
-        if (want >= 0) wait = window.setTimeout(() => ((wait = 0), step()), still.matches ? 0 : 850);
-      } else show(want);
+      if (active >= 0) flyOut(active);
+      if (want >= 0) flyIn(want);
+      active = want;
+      mark(active);
+      if (!still.matches) wait = window.setTimeout(() => ((wait = 0), step()), 500);
     };
     const go = (i: number) => {
       want = i;
@@ -150,6 +156,7 @@ export function PoolsShowcase({ ids, names, children }: { ids: string[]; names: 
       cancelAnimationFrame(raf);
       window.clearTimeout(wait);
       section.removeAttribute("data-pin");
+      flies[1].remove();
     };
   }, [ids, names]);
 
