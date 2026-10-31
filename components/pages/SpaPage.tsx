@@ -5,6 +5,7 @@ import { ContactStrip } from "../ContactStrip";
 import { FacilityList, PoolCards, Sessions } from "../sections";
 import { PhoneIcon, Rich, WhatsAppPending } from "../ui";
 import { SpaWater } from "../SpaWater";
+import { SpaDuo } from "../SpaDuo";
 import { PageHero } from "./PageHero";
 import { PoolsShowcase } from "../PoolsShowcase";
 import { pools } from "@/content/spa";
@@ -57,21 +58,27 @@ export function SpaPage({ locale }: { locale: Locale }) {
       </section>
 
       <section className="tp-section" aria-labelledby="tp-water-h">
-        <div className="tp-wrap tp-two-col">
-          <div className="tp-reveal">
-            <h2 id="tp-water-h" className="tp-h2">
-              {p.waterHeading}
-            </h2>
-            <p>
-              <Rich text={p.water} locale={locale} />
-            </p>
-          </div>
-          <div className="tp-reveal">
-            <h2 className="tp-h2">{p.walkHeading}</h2>
-            <p>
-              <Rich text={p.walk} locale={locale} />
-            </p>
-          </div>
+        <div className="tp-wrap tp-reveal">
+          <SpaDuo
+            water={
+              <>
+                <h2 id="tp-water-h" className="tp-h2">
+                  {p.waterHeading}
+                </h2>
+                <p>
+                  <Rich text={p.water} locale={locale} />
+                </p>
+              </>
+            }
+            forest={
+              <>
+                <h2 className="tp-h2">{p.walkHeading}</h2>
+                <p>
+                  <Rich text={p.walk} locale={locale} />
+                </p>
+              </>
+            }
+          />
         </div>
         <div className="tp-wrap">
           <p className="tp-note tp-reveal">{p.note}</p>

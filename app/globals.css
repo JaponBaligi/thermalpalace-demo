@@ -1178,6 +1178,108 @@ html.lenis body {
     padding-block-end: clamp(13rem, 20vw, 16rem);
   }
 
+  /* spa: "thermal water | walking in nature" duo; static backgrounds first, canvases only add light */
+  .tp-duo {
+    display: grid;
+    border-block: 1px solid var(--color-line);
+  }
+
+  .tp-duo-half {
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 4vw, 3.5rem);
+    color: var(--color-bone);
+  }
+
+  .tp-duo-body {
+    position: relative;
+    z-index: 2;
+    max-inline-size: 34rem;
+    text-shadow: 0 1px 12px rgb(14 16 18 / 0.7);
+  }
+
+  .tp-duo-body p {
+    color: var(--color-bone);
+  }
+
+  .tp-duo-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    inline-size: 100%;
+    block-size: 100%;
+    pointer-events: none;
+  }
+
+  .tp-duo-water {
+    background:
+      radial-gradient(70% 60% at 30% 35%, rgb(200 135 58 / 0.1), transparent 70%),
+      radial-gradient(90% 80% at 70% 80%, #23302f 0%, transparent 70%),
+      linear-gradient(160deg, #1b2424 0%, #121819 100%);
+  }
+
+  .tp-duo-ripple {
+    opacity: 0.45;
+  }
+
+  .tp-duo-fog {
+    filter: blur(6px);
+  }
+
+  .tp-duo-forest {
+    background: #121614;
+  }
+
+  .tp-duo-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: 50% 60%;
+    opacity: 0.75;
+    filter: saturate(0.7);
+  }
+
+  .tp-duo-forest::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(180deg, rgb(14 16 18 / 0.45), rgb(14 16 18 / 0.72));
+  }
+
+  .tp-duo-rule {
+    position: relative;
+    block-size: 1px;
+    background: #a88b57;
+  }
+
+  .tp-duo-rule::after {
+    content: "";
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    inline-size: 1.75rem;
+    block-size: 1.75rem;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: var(--color-basalt) url(/images/ornament-rosette.svg) center / 72% no-repeat;
+    box-shadow: 0 0 0 1px #a88b57;
+  }
+
+  @media (min-width: 64rem) {
+    .tp-duo {
+      grid-template-columns: 1fr 1px 1fr;
+    }
+
+    .tp-duo-rule {
+      block-size: auto;
+    }
+  }
+
   .tp-spa-water {
     position: absolute;
     inset: 0;
