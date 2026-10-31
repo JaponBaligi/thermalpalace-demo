@@ -1174,8 +1174,13 @@ html.lenis body {
   }
 
   .tp-spa-rise {
-    background: linear-gradient(180deg, var(--color-slate-soft) 0%, var(--color-basalt-deep) 45%, #101315 calc(100% - 13rem), #14171a calc(100% - 6rem), var(--color-basalt) 100%);
-    padding-block-end: clamp(13rem, 20vw, 16rem);
+    background: linear-gradient(180deg, var(--color-slate-soft) 0%, var(--color-basalt-deep) 45%, #101315 calc(100% - 4rem), var(--color-basalt) 100%);
+    padding-block-end: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  /* the duo follows the spa scene with only a hairline of space */
+  .tp-duo-section {
+    padding-block-start: 3px;
   }
 
   /* spa: "thermal water | walking in nature" duo; static backgrounds first, canvases only add light */

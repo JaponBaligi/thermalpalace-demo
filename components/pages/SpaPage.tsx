@@ -57,7 +57,7 @@ export function SpaPage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="tp-section" aria-labelledby="tp-duo-h">
+      <section className="tp-section tp-duo-section" aria-labelledby="tp-duo-h">
         <div className="tp-reveal">
           <SpaDuo
             title={p.duoTitle}
